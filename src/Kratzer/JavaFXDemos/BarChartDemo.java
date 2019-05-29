@@ -1,4 +1,4 @@
-package Kratzer.JavaFXDemos;// Demonstrate a BarChart
+package Kratzer.JavaFXDemos;// Demonstrate a BarChartExample
 
 import javafx.application.*;
 import javafx.scene.*;
@@ -19,7 +19,7 @@ public class BarChartDemo extends Application {
 	public void start(Stage myStage) {
 
 		// Give the stage a title.  
-		myStage.setTitle("BarChart Demo");
+		myStage.setTitle("BarChartExample Demo");
 
 		// Use a FlowPane for the root node. 
 		FlowPane rootNode = new FlowPane();

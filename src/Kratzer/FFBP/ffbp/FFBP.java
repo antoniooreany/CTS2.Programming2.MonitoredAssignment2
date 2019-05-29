@@ -1,5 +1,7 @@
 package Kratzer.FFBP.ffbp;
 
+import ffbp.FFBPError;
+
 public class FFBP {
 
 	private int[] layout;
@@ -53,7 +55,7 @@ public class FFBP {
 			alpha = 0.0;
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new FFBPError();
+			throw new ffbp.FFBPError();
 		}
 	}
 	
@@ -74,14 +76,14 @@ public class FFBP {
 			}
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new FFBPError();
+			throw new ffbp.FFBPError();
 		}	
 	}
 	
 	public void activateInputAndFeedForward(double[] input) {
 		try {
 			if (input.length != layer[0].cell.length)
-				throw new FFBPError();
+				throw new ffbp.FFBPError();
 			// copy the input vector
 			for (int i = 0; i < input.length; ++i)
 				layer[0].cell[i].activation = input[i];
@@ -95,7 +97,7 @@ public class FFBP {
 				}				
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new FFBPError();
+			throw new ffbp.FFBPError();
 		}	
 	}
 	
@@ -106,14 +108,14 @@ public class FFBP {
 				output[i] = layer[layout.length-1].cell[i].activation;
 			return output;
 		} catch (Exception e) {
-			throw new FFBPError();
+			throw new ffbp.FFBPError();
 		}	
 	}
 	
 	public void applyDesiredOutputAndPropagateBack(double[] desired) {
 		try {
 			if (desired.length != layer[layout.length-1].cell.length)
-				throw new FFBPError();
+				throw new ffbp.FFBPError();
 			aggregateDelta = 0.0;
 			// calculate delta at output vector
 			for (int i = 0; i < desired.length; ++i) {
