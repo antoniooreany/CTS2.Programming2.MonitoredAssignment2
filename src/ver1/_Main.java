@@ -1,4 +1,4 @@
-package MA1;
+package ver1;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 // Group members : Rodion Danilenko, Anton Gorshkov, Henry Cela
-public class Main extends Application {
+public class _Main extends Application {
     // Initialize constants
     private static final double TOP_INSET = 10;
     private static final double RIGHT_INSET = 10;

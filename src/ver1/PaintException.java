@@ -1,4 +1,4 @@
-package MA1;
+package ver1;
 
 public class PaintException extends RuntimeException {
 }

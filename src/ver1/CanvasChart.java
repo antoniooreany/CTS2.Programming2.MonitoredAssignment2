@@ -1,3 +1,5 @@
+package ver1;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -8,11 +10,13 @@ public class CanvasChart extends Canvas {
     private static final int number = 10;
     private static final int low = 3;
     private static final double high = 2;
-    private static final int barGap = 10;
-    private static final int barWidth = 10;
+    private static final int barGap = 12;
+    private static final int barWidth = 12;
+    private final double[] ov;
 
-    CanvasChart(int[] data) {
+    CanvasChart(double[] ov) {
         super(width, height);
+        this.ov = ov;
         int row = 0;
         for (; row < number; row++) {
             double y = getY(row);
@@ -22,7 +26,7 @@ public class CanvasChart extends Canvas {
         gc.fillText("    A     B     C     D     E     F     G     H  ", 0, getY(row));
 
         int x = barGap;
-        for (int col : data) {
+        for (double col : ov) {
             gc.fillRect(x, 420-col,
                         barWidth, col);
             x += barWidth + barGap;

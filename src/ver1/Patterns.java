@@ -1,5 +1,7 @@
+package ver1;
+
 public class Patterns {
-    //            [row][col] patternA = {
+    //            [row][col] pattern2DA = {
 //            {123}
 //            {456}
 //            {789}}

@@ -1,4 +1,5 @@
-import MA1.PaintPane;
+package ver1;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,6 +27,10 @@ public class Main extends Application {
     public static LeftSide leftSide;
     public static PaintPane rightSide;
     public Scene scene;
+    //    public double[] iv = new double[]{110, 120, 130, 140, 150, 160, 170, 180};
+    public static double[] iv;
+    public static double[] ov; //TODO init this
+
 
     // Override the start() method.
     @Override
@@ -35,19 +40,23 @@ public class Main extends Application {
         // Create the major HBox.
         rootNode = new HBox(10);
 
-        leftSide = new LeftSide();
         // Create the GridPane.
-        rightSide = new PaintPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP,
+        rightSide = new PaintPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, //TODO NPE
                 PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
+        iv = rightSide.sequencePattern;
         // Gaps at the outside borders
         rightSide.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
+
+        ov = TXOR_Engine.run(iv); //TODO NPE
+        // Create the ver1.LeftSide.
+        leftSide = new LeftSide(ov);
+
         // Create a scene.
         scene = new Scene(rootNode);
         // Handle a mouse press and drag event on the scene.
         rightSide.addEventHandler(MouseEvent.ANY, rightSide.getMouseEventHandler());
         // Create a scene.
         rootNode.getChildren().addAll(leftSide, rightSide);
-
         // Set the scene on the stage.
         stage.setScene(scene);
         // the size of the stage match the size of the scene

@@ -1,3 +1,5 @@
+package ver1;
+
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 import javafx.scene.chart.BarChart;

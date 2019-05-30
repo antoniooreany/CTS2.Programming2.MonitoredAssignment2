@@ -1,3 +1,5 @@
+package ver1;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -31,16 +33,16 @@ public class NetLearnButtonPane extends VBox {
             }
         });
 
-//        NOISE_BTN.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//        noiseBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 //            @Override
 //            public void handle(MouseEvent event) {
-//                Main.leftSide.alphabetButtonsPane = new AlphabetButtonsPane();
+//                ver1._Main.leftSide.alphabetButtonsPane = new ver1.AlphabetButtonsPane();
 //            }
 //        });
 
     }
 
-    private int getaDouble(int col, int row) {
+    private double getaDouble(int col, int row) {
         return Main.rightSide.getPixelsColorArray()[col][row];
     }
 }

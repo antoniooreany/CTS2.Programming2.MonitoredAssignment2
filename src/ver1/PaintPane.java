@@ -1,4 +1,4 @@
-package MA1;
+package ver1;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
@@ -10,20 +10,24 @@ import javafx.scene.paint.Paint;
 public class PaintPane extends GridPane {
     // TODO Do we need all of these fields?
     // TODO If not, than How to avoid creating these fields?
-    public final int colCount;
-    public final int rowCount;
-    public final double hGap;
-    public final double vGap;
-    public final double pixelWidth;
-    public final double pixelHeight;
-    public final Color initColor;
-    public final Color paintColor;
-    public final Pixel[][] pixels;
+    public int colCount;
+    public int rowCount;
+    public double hGap;
+    public double vGap;
+    public double pixelWidth;
+    public double pixelHeight;
+    public Color initColor;
+    public Color paintColor;
+    public Pixel[][] pixels;
+    public double[][] pattern;
+    public double[] sequencePattern;
 
     public PaintPane(int colCount, int rowCount,
                      double hGap, double vGap,
                      double pixelWidth, double pixelHeight,
                      Color initColor, Color paintColor) {
+        // Initialize pixels.
+        fillRoot();
         // Initialize fields
         this.colCount = colCount;
         this.rowCount = rowCount;
@@ -33,12 +37,22 @@ public class PaintPane extends GridPane {
         this.pixelHeight = pixelHeight;
         this.initColor = initColor;
         this.paintColor = paintColor;
-        this.pixels = new Pixel[rowCount][colCount];
+//        this.pixels = new ver1.Pixel[rowCount][colCount]; //TODO pixels
+        this.pattern = getPixelsColorArray(); //TODO NPE
+        this.sequencePattern = PaintData.getPixelsSequenceNumbers(pattern); //TODO NPE
         // Set vertical and horizontal gaps between controls.
         setVgap(vGap);
         setHgap(hGap);
-        // Initialize pixels.
-        fillRoot();
+    }
+
+
+    // A new pixel addition method
+    private void addNewPixel(int row, int col, Color color) {
+        Pixel pixel = new Pixel(pixelWidth, pixelHeight, color, row, col);
+        add(pixel, col, row); //TODO Everywhere in the app I use (row, col), not (col, row)
+        pixels[row][col] = pixel;
+//        pixels = new ver1.Pixel[rowCount][colCount];
+
     }
 
     // Root filler method
@@ -65,12 +79,6 @@ public class PaintPane extends GridPane {
         }
     }
 
-    // A new pixel addition method
-    private void addNewPixel(int row, int col, Color color) {
-        Pixel pixel = new Pixel(pixelWidth, pixelHeight, color);
-        add(pixel, col, row); //TODO Everywhere in the app I use (row, col), not (col, row)
-        pixels[row][col] = pixel;
-    }
 
     // Position index getting method
     private int getPixelPositionIndex(double coordinate, double gap, double inset, double pixelSize) {
@@ -90,15 +98,14 @@ public class PaintPane extends GridPane {
                 // in case of SECONDARY BUTTON - clear
                 else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                     fillRoot();
-                }
-                else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
+                } else if (mouseEvent.getButton() == MouseButton.MIDDLE) {
                     paint(mouseEvent, initColor);
                 }
             }
         };
     }
 
-    public void paintPattern(double[][] iv) {
+    public void paintByPattern(double[][] iv) {
         fillRoot();
         if (iv.length != colCount) throw new PaintException();
         for (int col = 0; col < colCount; col++) {
@@ -109,11 +116,11 @@ public class PaintPane extends GridPane {
         }
     }
 
-    public int[][] getPixelsColorArray() {
-        int[][] result = new int[rowCount][colCount];
+    public double[][] getPixelsColorArray() {
+        double[][] result = new double[rowCount][colCount];
         for (int col = 0; col < colCount; col++) {
             for (int row = 0; row < rowCount; row++) {
-                Paint fill = pixels[row][col].getFill();
+                Paint fill = pixels[row][col].getFill(); //TODO NPE
                 if (fill == initColor) result[row][col] = 0;
                 else if (fill == paintColor) result[row][col] = 1;
             }

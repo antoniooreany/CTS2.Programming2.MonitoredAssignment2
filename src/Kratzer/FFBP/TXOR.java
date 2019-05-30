@@ -16,7 +16,8 @@ public class TXOR {
 		double[] iv0 = {0.0, 0.0}; 
 		double[] iv1 = {0.0, 1.0}; 
 		double[] iv2 = {1.0, 0.0}; 
-		double[] iv3 = {1.0, 1.0}; 
+		double[] iv3 = {1.0, 1.0};
+
 		double[] ov0 = {0.0}; 
 		double[] ov1 = {1.0}; 
 		double[] ov2 = {1.0}; 

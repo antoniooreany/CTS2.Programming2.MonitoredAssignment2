@@ -1,4 +1,4 @@
-package Kratzer.JavaFXDemos;// Demonstrate a BarChartExample
+package Kratzer.JavaFXDemos;// Demonstrate a ver1.BarChartExample
 
 import javafx.application.*;
 import javafx.scene.*;
@@ -19,7 +19,7 @@ public class BarChartDemo extends Application {
 	public void start(Stage myStage) {
 
 		// Give the stage a title.  
-		myStage.setTitle("BarChartExample Demo");
+		myStage.setTitle("ver1.BarChartExample Demo");
 
 		// Use a FlowPane for the root node. 
 		FlowPane rootNode = new FlowPane();
@@ -51,7 +51,7 @@ public class BarChartDemo extends Application {
 		XYChart.Series<String, Number> february = new XYChart.Series<>();
 		XYChart.Series<String, Number> march = new XYChart.Series<>();
 
-		// Populate each series with data. 
+		// Populate each series with iv.
 		january.setName("January");
 		january.getData().add(new XYChart.Data<String, Number>("John", 300));
 		january.getData().add(new XYChart.Data<String, Number>("Mary", 325));
