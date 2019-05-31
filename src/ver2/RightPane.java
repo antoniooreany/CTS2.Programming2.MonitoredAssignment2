@@ -19,10 +19,10 @@ class RightPane extends GridPane {
     private final double pixelHeight;
     private final Color initColor;
     private final Color paintColor;
-    private Pixel[][] pixelArray2D;
-    private Pixel[] pixelArray;
-    private double[][] colorArray2d;
-    public double[] colorArray;
+    private Pixel[][] pixelMatrix;
+    private Pixel[] pixelVector;
+    private double[][] matrix;
+    public double[] vector;
 
     RightPane(int colCount, int rowCount,
               double hGap, double vGap,
@@ -38,10 +38,10 @@ class RightPane extends GridPane {
         this.pixelHeight = pixelHeight;
         this.initColor = initColor;
         this.paintColor = paintColor;
-        this.pixelArray2D = new Pixel[rowCount][colCount];
-        this.pixelArray = new Pixel[pixelCount];
-        this.colorArray2d = new double[rowCount][colCount];
-        this.colorArray = new double[pixelCount];
+        this.pixelMatrix = new Pixel[rowCount][colCount];
+        this.pixelVector = new Pixel[pixelCount];
+        this.matrix = new double[rowCount][colCount];
+        this.vector = new double[pixelCount];
         // Set vertical and horizontal gaps between controls.
         setVgap(vGap);
         setHgap(hGap);
@@ -59,6 +59,7 @@ class RightPane extends GridPane {
                 addNewPixel(row, col, initColor);
             }
         }
+//        CanvasChart.initCanvasChart(); //TODO NPE
     }
 
     // Paint method
@@ -67,34 +68,35 @@ class RightPane extends GridPane {
         int col = getPixelPositionIndex(mouseEvent.getX(), hGap, getPadding().getLeft(), pixelWidth);
         int row = getPixelPositionIndex(mouseEvent.getY(), vGap, getPadding().getTop(), pixelHeight);
         // Create the painted pixel, put it in the appropriate position (if it exists) in the rootPane
-        if (col >= 0 && col < colCount
-                && row >= 0 && row < rowCount) {
+        if (col >= 0 && col < colCount && row >= 0 && row < rowCount) {
             // A new pixel addition
             addNewPixel(row, col, color);
         }
+//        CanvasChart.initCanvasChart(); //TODO Move this statement into the addNewPixel()
     }
 
     // A new pixel addition method
     private void addNewPixel(int row, int col, Color color) {
         Pixel pixel = new Pixel(pixelWidth, pixelHeight, color, row, col);
         add(pixel, col, row);
-        pixelArray2D[row][col] = pixel;
-        pixelArray[pixel.seqNum] = pixel;
+        pixelMatrix[row][col] = pixel;
+        pixelVector[pixel.seqNum] = pixel;
         if (color == initColor) {
-            colorArray2d[row][col] = 0;
-            colorArray[pixel.seqNum] = 0;
+            matrix[row][col] = 0;
+            vector[pixel.seqNum] = 0;
         } else {
-            colorArray2d[row][col] = 1;
-            colorArray[pixel.seqNum] = 1;
+            matrix[row][col] = 1;
+            vector[pixel.seqNum] = 1;
         }
-//        CanvasChart.initCanvasChart(); // TODO How to redraw the Canvas chart when adding the pixel?
+//        CanvasChart.initCanvasChart(); // TODO NPE
+                                        // TODO How to redraw the Canvas chart when adding the pixel?
 
         //TODO  readColorArray[256],
         //TODO  put it into nn, getOutput()
         //TODO  nn.take output[8],
         //TODO  draw output[8] in BarChart
 
-//        Main.leftPane.net = LeftPane.getNewNet();
+//        Main.leftPane.net = LeftPane.getNewNet(); // TODO No!
 //        Main.leftPane.output = Main.leftPane.getOutput();
 //
 //        double[] output = Main.leftPane.getOutput(); //TODO NPE
@@ -104,6 +106,7 @@ class RightPane extends GridPane {
 
     // Position index getting method
     private int getPixelPositionIndex(double coordinate, double gap, double inset, double pixelSize) {
+        CanvasChart.initCanvasChart(); //TODO Move this statement into the addNewPixel()
         // Position index calculation
         return (int) ((coordinate + gap / 2 - inset) / (pixelSize + gap));
     }
@@ -121,11 +124,14 @@ class RightPane extends GridPane {
                 else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                     fillRoot();
                 }
+                // TODO How to redraw the Canvas chart when adding the pixel?
+                CanvasChart.initCanvasChart(); // TODO How to redraw the Canvas chart when adding the pixel?
+                // TODO How to redraw the Canvas chart when adding the pixel?
             }
         };
     }
 
-    public void paintByPattern(double[][] iv) {
+    public void paintByMatrix(double[][] iv) {
         fillRoot();
         if (iv.length != colCount) throw new PaintException();
         for (int col = 0; col < colCount; col++) {
@@ -134,6 +140,7 @@ class RightPane extends GridPane {
                 if (iv[row][col] == 1) addNewPixel(row, col, paintColor); //TODO Optimize "> 0.5"
             }
         }
+//        CanvasChart.initCanvasChart(); //TODO Move this statement into the addNewPixel()
     }
 
 }

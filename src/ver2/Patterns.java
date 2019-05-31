@@ -1,18 +1,26 @@
 package ver2;
 
 public class Patterns {
-    //        pattern[1] = pattern2DA[0][1];
-//        pattern[2] = pattern2DA[0][2];
 
-    public static double[] getIV(double[][] pattern2DA) {
+    public static double[] getVector(double[][] matrixA) {
         double[] pattern = new double[Main.rightPane.pixelCount];
-        for (int row = 0; row < pattern2DA.length; row++) {
-            for (int col = 0; col < pattern2DA[row].length; col++) {
-                pattern[row * Main.COL_COUNT + col] = pattern2DA[row][col];
+        for (int row = 0; row < matrixA.length; row++) {
+            for (int col = 0; col < matrixA[row].length; col++) {
+                pattern[row * Main.COL_COUNT + col] = matrixA[row][col];
             }
         }
         return pattern;
     }
+
+//    public static double[][] getOvLetter(double[][][] matrixA) {
+//        double[] pattern = new double[Main.rightPane.pixelCount];
+//        for (int row = 0; row < matrixA.length; row++) {
+//            for (int col = 0; col < matrixA[row].length; col++) {
+//                pattern[row * Main.COL_COUNT + col] = matrixA[row][col];
+//            }
+//        }
+//        return pattern;
+//    }
 
     public static final double[] ovA = {1, 0, 0, 0, 0, 0, 0, 0};
     public static final double[] ovB = {0, 1, 0, 0, 0, 0, 0, 0};
@@ -23,7 +31,10 @@ public class Patterns {
     public static final double[] ovG = {0, 0, 0, 0, 0, 0, 1, 0};
     public static final double[] ovH = {0, 0, 0, 0, 0, 0, 0, 1};
 
-    public static final double[][] pattern2DA = {
+    public static final double[][] ovLetter = {ovA, ovB, ovC, ovD, ovE, ovF, ovG, ovH};
+
+
+    public static final double[][] matrixA = {
             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0},
@@ -42,7 +53,7 @@ public class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
     };
 
-    public static final double[][] pattern2DB = {
+    public static final double[][] matrixB = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -61,7 +72,7 @@ public class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] pattern2DC = {
+    public static final double[][] matrixC = {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -80,7 +91,7 @@ public class Patterns {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] pattern2DD = {
+    public static final double[][] matrixD = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -99,7 +110,7 @@ public class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] pattern2DE = {
+    public static final double[][] matrixE = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -118,7 +129,7 @@ public class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    public static final double[][] pattern2DF = {
+    public static final double[][] matrixF = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -137,7 +148,7 @@ public class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
-    public static final double[][] pattern2DG = {
+    public static final double[][] matrixG = {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -156,7 +167,7 @@ public class Patterns {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] pattern2DH = {
+    public static final double[][] matrixH = {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -175,5 +186,5 @@ public class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
     };
 
-
+    public static final double[][][] matricesLetter = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
 }

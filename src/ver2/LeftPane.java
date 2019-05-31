@@ -1,51 +1,50 @@
 package ver2;
 
 import ffbp.FFBP;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.util.Random;
 
 public class LeftPane extends VBox {
-    public final Button newNetBtn;
-    public final ToggleButton noiseBtn;
-    public final Button learn500CyclesBtn;
-    public final Separator separator1;
-    public final Button aBtn;
-    public final Button bBtn;
-    public final Button cBtn;
-    public final Button dBtn;
-    public final Button eBtn;
-    public final Button fBtn;
-    public final Button gBtn;
-    public final Button hBtn;
-    public final Separator separator2;
-    public CanvasChart canvasChart;
+    public final Button newNetBtn = new Button("New Net");
+    public final ToggleButton noiseBtn = new ToggleButton("Noise");
+    public final Button learn500CyclesBtn = new Button("Learn 500 Cycles");
+    public final Separator separator1 = new Separator();
+
+    public Button[] btnsLetters;
+
+    public final Separator separator2 = new Separator();
+    public CanvasChart canvasChart = new CanvasChart(); //TODO Do it with BarChart. setAnimation(off)
+    private final int cyclesToLearn = 500;
     public FFBP net;
     public double[] output;
+    public static int rawCount = Main.ROW_COUNT; //TODO
+    public static int colCount = Main.COL_COUNT; //TODO
 
 
     public LeftPane() {
-        newNetBtn = new Button("New Net");
-        noiseBtn = new ToggleButton("Noise");
-        learn500CyclesBtn = new Button("Learn 500 Cycles");
-        separator1 = new Separator();
-        aBtn = new Button("A");
-        bBtn = new Button("B");
-        cBtn = new Button("C");
-        dBtn = new Button("D");
-        eBtn = new Button("E");
-        fBtn = new Button("F");
-        gBtn = new Button("G");
-        hBtn = new Button("H");
-        separator2 = new Separator();
-        canvasChart = new CanvasChart();
+
+        btnsLetters = new Button[]{
+                new Button("A"),
+                new Button("B"),
+                new Button("C"),
+                new Button("D"),
+                new Button("E"),
+                new Button("F"),
+                new Button("G"),
+                new Button("H")
+        };
+//        for (int i = 0; i < 8; i++) {
+//            btnsLetters[i] = new Button();
+//        }
+
+//        getChildren().addAll(newNetBtn, noiseBtn, learn500CyclesBtn, separator1, aBtn, bBtn, cBtn, dBtn, eBtn, fBtn, gBtn, hBtn, separator2, canvasChart);
         getChildren().addAll(newNetBtn, noiseBtn, learn500CyclesBtn, separator1,
-                aBtn, bBtn, cBtn, dBtn, eBtn, fBtn, gBtn, hBtn, separator2, canvasChart);
+                btnsLetters[0], btnsLetters[1], btnsLetters[2], btnsLetters[3], btnsLetters[4], btnsLetters[5], btnsLetters[6], btnsLetters[7],
+                separator2, canvasChart);
         net = getNewNet();
         output = getOutput();
 
@@ -54,70 +53,35 @@ public class LeftPane extends VBox {
             CanvasChart.initCanvasChart();
         });
 
-        learn500CyclesBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                learn(500); // output = getOutput();
-                CanvasChart.initCanvasChart();
-            }
+        learn500CyclesBtn.setOnMouseClicked(event -> {
+            learn(cyclesToLearn); // output = getOutput();
+            CanvasChart.initCanvasChart();
         });
 
-        aBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DA)));
-        bBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DB)));
-        cBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DC)));
-        dBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DD)));
-        eBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DE)));
-        fBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DF)));
-        gBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DG)));
-        hBtn.setOnMouseClicked(ae -> Main.rightPane.paintByPattern(getPixelsRowCol(Patterns.pattern2DH)));
+//        for (Button btn : btnsLetters) {
+        for (int i = 0; i < Patterns.matricesLetter.length; i++) {
+            int finalI = i;
+            btnsLetters[i].setOnMouseClicked(ae -> {
+                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesLetter[finalI]));
+                CanvasChart.initCanvasChart();
+            });
+        }
     }
 
-    private void learn(int cyclesAmount) {
+    private void learn(int cyclesToLearn) {
 
 //        net = getNewNet(); //TODO Might be only in the launching application or by clicking "New net button"
 
         Random r = new Random();
-
-        for (int cycleNum = 0; cycleNum <= cyclesAmount; ++cycleNum) {
-            switch (r.nextInt(8)) {
-                case 0:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DA));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovA);
-                    break;
-                case 1:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DB));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovB);
-                    break;
-                case 2:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DC));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovC);
-                    break;
-                case 3:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DD));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovD);
-                    break;
-                case 4:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DE));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovE);
-                    break;
-                case 5:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DF));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovF);
-                    break;
-                case 6:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DG));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovG);
-                    break;
-                case 7:
-                    net.activateInputAndFeedForward(Patterns.getIV(Patterns.pattern2DH));
-                    net.applyDesiredOutputAndPropagateBack(Patterns.ovH);
-                    break;
-            }
+        for (int cycleNum = 0; cycleNum <= cyclesToLearn; ++cycleNum) {
+            int letterNumber = r.nextInt(Patterns.matricesLetter.length);
+            net.activateInputAndFeedForward(Patterns.getVector(Patterns.matricesLetter[letterNumber]));
+            net.applyDesiredOutputAndPropagateBack(Patterns.ovLetter[letterNumber]);
         }
     }
 
     public double[] getOutput() {
-        net.activateInputAndFeedForward(Main.rightPane.colorArray);
+        net.activateInputAndFeedForward(Main.rightPane.vector);
         return net.getOutput();
     }
 
@@ -130,21 +94,20 @@ public class LeftPane extends VBox {
         return net;
     }
 
-
-    public static double[][] getPixelsRowCol(double[][] pattern) {
-        if (Main.leftPane.noiseBtn.isSelected())
-            return applyNoise(pattern); //TODO If button Noise is pressed, learning with or without noise?
-        else return pattern;
+    public double[][] getMatrixWithNoise(double[][] matrix) {
+        if (noiseBtn.isSelected())
+            return applyNoise(matrix); //TODO If button Noise is pressed, learning with or without noise?
+        else return matrix;
     }
 
-    public static double[][] applyNoise(double[][] pattern) {
-        double[][] result = new double[ver1.Main.ROW_COUNT][ver1.Main.COL_COUNT];
+    public static double[][] applyNoise(double[][] matrix) {
+        double[][] result = new double[rawCount][colCount];
         Random random = new Random();
-        for (int col = 0; col < Main.COL_COUNT; col++) {
-            for (int row = 0; row < Main.ROW_COUNT; row++) {
-                result[row][col] = pattern[row][col];
+        for (int col = 0; col < colCount; col++) {
+            for (int row = 0; row < rawCount; row++) {
+                result[row][col] = matrix[row][col];
                 if (random.nextDouble() < 0.1) {
-                    if (pattern[row][col] == 0) result[row][col] = 1; //TODO Optimize "< 0.5"
+                    if (matrix[row][col] == 0) result[row][col] = 1; //TODO Optimize "< 0.5"
                     else result[row][col] = 0;
                 }
             }

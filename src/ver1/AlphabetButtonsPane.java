@@ -25,13 +25,13 @@ public class AlphabetButtonsPane extends VBox {
         H_BTN.setOnMouseClicked(ae -> Main.rightSide.paintByPattern(PaintData.getPixelsRowCol(Patterns.patternH)));
 
 
-//        B_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DB));
-//        C_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DC));
-//        D_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DD));
-//        E_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DE));
-//        F_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DF));
-//        G_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DG));
-//        H_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByPattern(ver1.Patterns.pattern2DH));
+//        B_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DB));
+//        C_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DC));
+//        D_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DD));
+//        E_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DE));
+//        F_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DF));
+//        G_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DG));
+//        H_BTN.setOnMouseClicked(ae -> ver1._Main.rightSide.paintByMatrix(ver1.Patterns.pattern2DH));
     }
 
 }

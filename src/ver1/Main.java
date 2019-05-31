@@ -52,19 +52,19 @@ public class Main extends Application {
         leftSide = new LeftSide(ov);
 
         // Create a scene.
-        scene = new Scene(rootNode);
-        // Handle a mouse press and drag event on the scene.
-        rightSide.addEventHandler(MouseEvent.ANY, rightSide.getMouseEventHandler());
-        // Create a scene.
-        rootNode.getChildren().addAll(leftSide, rightSide);
-        // Set the scene on the stage.
-        stage.setScene(scene);
-        // the size of the stage match the size of the scene
-        stage.sizeToScene();
-        // the size of the stage set as not resizable
-        stage.setResizable(false);
-        // Show the stage and its scene.
-        stage.show();
+//        scene = new Scene(rootNode);
+//         Handle a mouse press and drag event on the scene.
+//        rightSide.addEventHandler(MouseEvent.ANY, rightSide.getMouseEventHandler());
+//         Create a scene.
+//        rootNode.getChildren().addAll(leftSide, rightSide);
+//         Set the scene on the stage.
+//        stage.setScene(scene);
+//         the size of the stage match the size of the scene
+//        stage.sizeToScene();
+//         the size of the stage set as not resizable
+//        stage.setResizable(false);
+//         Show the stage and its scene.
+//        stage.show();
     }
 
     public static void main(String[] args) {

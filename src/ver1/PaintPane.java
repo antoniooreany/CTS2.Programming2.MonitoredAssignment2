@@ -69,14 +69,14 @@ public class PaintPane extends GridPane {
     // Paint method
     private void paint(MouseEvent mouseEvent, Color color) {
         // Column, row of pixel to paint initialization
-        int col = getPixelPositionIndex(mouseEvent.getX(), hGap, getPadding().getLeft(), pixelWidth);
-        int row = getPixelPositionIndex(mouseEvent.getY(), vGap, getPadding().getTop(), pixelHeight);
-        // Create the painted pixel, put it in the appropriate position (if it exists) in the rootPane
-        if (col >= 0 && col < colCount
-                && row >= 0 && row < rowCount) {
-            // A new pixel addition
-            addNewPixel(row, col, color);
-        }
+//        int col = getPixelPositionIndex(mouseEvent.getX(), hGap, getPadding().getLeft(), pixelWidth);
+//        int row = getPixelPositionIndex(mouseEvent.getY(), vGap, getPadding().getTop(), pixelHeight);
+//         Create the painted pixel, put it in the appropriate position (if it exists) in the rootPane
+//        if (col >= 0 && col < colCount
+//                && row >= 0 && row < rowCount) {
+//             A new pixel addition
+//            addNewPixel(row, col, color);
+//        }
     }
 
 
@@ -106,14 +106,14 @@ public class PaintPane extends GridPane {
     }
 
     public void paintByPattern(double[][] iv) {
-        fillRoot();
-        if (iv.length != colCount) throw new PaintException();
-        for (int col = 0; col < colCount; col++) {
-            if (iv[col].length != rowCount) throw new PaintException();
-            for (int row = 0; row < rowCount; row++) {
-                if (iv[row][col] == 1) addNewPixel(row, col, paintColor); //TODO Optimize "> 0.5"
-            }
-        }
+//        fillRoot();
+//        if (iv.length != colCount) throw new PaintException();
+//        for (int col = 0; col < colCount; col++) {
+//            if (iv[col].length != rowCount) throw new PaintException();
+//            for (int row = 0; row < rowCount; row++) {
+//                if (iv[row][col] == 1) addNewPixel(row, col, paintColor); //TODO Optimize "> 0.5"
+//            }
+//        }
     }
 
     public double[][] getPixelsColorArray() {

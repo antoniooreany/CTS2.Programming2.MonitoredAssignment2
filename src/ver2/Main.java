@@ -9,8 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 // Group members : Rodion Danilenko, Anton Gorshkov, Henry Cela
+//TODO Bug: when app starts, no info in the BarChart available. When mouse appears in the Scene, data appears in the BarChart.
+//TODO Make the info available in the BarChart when app starts.
 public class Main extends Application {
     // Initialize constants
+    private static final int ROOT_NODE_SPACING = 10;
     private static final double TOP_INSET = 10;
     private static final double RIGHT_INSET = 10;
     private static final double BOTTOM_INSET = 10;
@@ -24,6 +27,7 @@ public class Main extends Application {
     private static final Color INIT_COLOR = Color.WHITE;
     private static final Color PAINT_COLOR = Color.BLACK;
     private static final String TITLE = "Monitored Assignment1";
+
     public static HBox rootNode;
     public static RightPane rightPane;
     public static LeftPane leftPane;
@@ -34,13 +38,13 @@ public class Main extends Application {
         // Give the stage a TITLE.
         stage.setTitle(TITLE);
         // Create the major HBox.
-        rootNode = new HBox(10);
+        rootNode = new HBox(ROOT_NODE_SPACING);
         // Create the GridPane.
         rightPane = new RightPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
         // Gaps at the outside borders
         rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
-        // Create a scene.
         leftPane = new LeftPane();
+        // Create a scene.
         scene = new Scene(rootNode);
         // Handle a mouse press and drag event on the scene.
         rightPane.addEventHandler(MouseEvent.ANY, rightPane.getMouseEventHandler());

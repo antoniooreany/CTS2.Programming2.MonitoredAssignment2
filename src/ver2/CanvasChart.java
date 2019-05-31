@@ -34,9 +34,7 @@ public class CanvasChart extends Canvas {
         for (int i = 0; i < 11; i++) {
             gc.strokeLine(leftGap, i* linesHeight, width, i* linesHeight);
         }
-
         gc.fillText("    A     B     C     D     E     F     G     H  ", 0, 480);
-
         int x = barGap;
         for (double col : output) {
             gc.fillRect(x, 450 - col*400, barWidth, col*400);
@@ -44,5 +42,8 @@ public class CanvasChart extends Canvas {
         }
     }
 
+    private double getY(int i) {
+        return (i + high) * height / (linesNum + low);
+    }
 
 }
