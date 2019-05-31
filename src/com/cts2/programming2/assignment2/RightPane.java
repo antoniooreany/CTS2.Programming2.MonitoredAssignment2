@@ -67,6 +67,9 @@ class RightPane extends GridPane {
         // Column, row of pixel to paintByMouse initialization
         int col = getPixelPositionIndex(mouseEvent.getX(), hGap, getPadding().getLeft(), pixelWidth);
         int row = getPixelPositionIndex(mouseEvent.getY(), vGap, getPadding().getTop(), pixelHeight);
+
+//        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+
         // Create the painted pixel, put it in the appropriate position (if it exists) in the rootPane
         if (col >= 0 && col < colCount && row >= 0 && row < rowCount) {
             // A new pixel addition
@@ -106,7 +109,10 @@ class RightPane extends GridPane {
 
     // Position index getting method
     private int getPixelPositionIndex(double coordinate, double gap, double inset, double pixelSize) {
-        CanvasChart.initCanvasChart(); //TODO Move this statement into the addNewPixel()
+//        CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS! //TODO Move this statement into the addNewPixel()
+//        renewBarChart(barChart, dataSeries);
+//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+
         // Position index calculation
         return (int) ((coordinate + gap / 2 - inset) / (pixelSize + gap));
     }
@@ -119,14 +125,20 @@ class RightPane extends GridPane {
                 // in case of PRIMARY BUTTON - paintByMouse
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                     paintByMouse(mouseEvent, paintColor);
+//                    Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+
                 }
                 // in case of SECONDARY BUTTON - clear
                 else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                     fillRoot();
+//                    Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+
                 }
                 // TODO How to redraw the Canvas chart when adding the pixel?
-                CanvasChart.initCanvasChart(); // TODO How to redraw the Canvas chart when adding the pixel?
+                Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+//                CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS! // TODO How to redraw the Canvas chart when adding the pixel?
                 // TODO How to redraw the Canvas chart when adding the pixel?
+
             }
         };
     }

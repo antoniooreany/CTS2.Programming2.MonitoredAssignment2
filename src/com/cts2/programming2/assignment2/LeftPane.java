@@ -1,6 +1,10 @@
 package com.cts2.programming2.assignment2;
 
 import ffbp.FFBP;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
@@ -15,57 +19,145 @@ public class LeftPane extends VBox {
     private static final double alpha = 0.5;
     private static final int hiddenLayerVectorLength = 16;
     private final int cyclesToLearn = 500;
-    public final Button newNetBtn = new Button("New Net");
-    public final ToggleButton noiseBtn = new ToggleButton("Noise");
-    public final Button learnBtn = new Button("Learn 500 Cycles");
-    public final Separator separator1 = new Separator();
-    public Button[] btnAlphabetArray;
-    public final Separator separator2 = new Separator();
-    public CanvasChart canvasChart = new CanvasChart(); //TODO Do it with BarChart. setAnimation(off)
+    public Button newNetBtn = new Button("New Net");
+    public ToggleButton noiseBtn = new ToggleButton("Noise");
+    public Button learnBtn = new Button("Learn 500 Cycles");
+    public Separator separator1 = new Separator();
+    public Button[] alphabetButtonsArray;
+    public Separator separator2 = new Separator();
+    public CanvasChart canvasChart; //TODO Do it with BarChart. setAnimation(off)
+    //        public CanvasChart canvasChart = new BarChart<>(); //TODO Do it with BarChart. setAnimation(off)
     public FFBP net;
     public double[] output;
     public static int rawCount = Main.ROW_COUNT; //TODO
     public static int colCount = Main.COL_COUNT; //TODO
-    private final int AlphabetButtonsAmount = Patterns.matricesArray.length;
+    private final char firstButtonNameChar = 'A';
+    public BarChart<String, Number> barChart;
+    public XYChart.Series<String, Number> dataSeries;
+
 
     public LeftPane() {
-        char firstButtonName = 'A';
-        btnAlphabetArray = new Button[AlphabetButtonsAmount];
-        for (int i = 0; i < AlphabetButtonsAmount; i++) {
-            btnAlphabetArray[i] = new Button(String.valueOf((char)(firstButtonName + i)));
-        }
-        getChildren().addAll(newNetBtn, noiseBtn, learnBtn, separator1);
-        for (int i = 0; i < AlphabetButtonsAmount; i++) getChildren().add(btnAlphabetArray[i]);
-        getChildren().addAll(separator2, canvasChart);
-
-
         net = getNewNet();
         output = getOutput();
 
+        createLeftPaneButtons();
+        createSetOnMouseClickedEventHandlers();
+        addButtons();
+
+//        createAndAddCanvasChart();
+
+        createAndAddBarChart();
+
+    }
+
+    private void createAndAddCanvasChart() {
+        canvasChart = new CanvasChart(); //TODO Do it with BarChart. setAnimation(off)
+        getChildren().add(canvasChart);
+    }
+
+    private void createAndAddBarChart() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        // Create a BarChart
+        barChart = new BarChart<String, Number>(xAxis, yAxis);
+        barChart.setAnimated(false); //TODO Does it needed to be done?
+
+        // Series 1 - Data of 2014
+        dataSeries = new XYChart.Series<String, Number>();
+
+        renewBarChart(barChart, dataSeries);
+//        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+
+        // Add Series to BarChart.
+        barChart.getData().add(dataSeries); //TODO Uncomment this line?
+
+
+        getChildren().add(barChart);
+
+
+    }
+
+    public void renewBarChart(BarChart<String, Number> barChart, XYChart.Series<String, Number> dataSeries) {
+//        for (int i = 0; i < alphabetButtonsArray.length; i++) { //TODO Loop through the chars
+//            dataSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf((char) (firstButtonNameChar + i)), getOutput()[i]));
+//        }
+
+        for (char ch = firstButtonNameChar; ch < firstButtonNameChar + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
+            dataSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(ch), getOutput()[ch - firstButtonNameChar]));
+        }
+
+//        for (int i = 0; i < alphabetButtonsArray.length; i++) { //TODO Loop through the chars
+//            alphabetButtonsArray[i] = new Button(String.valueOf((char) (firstButtonNameChar + i)));
+//        }
+
+//        for (char ch = firstButtonNameChar; ch < firstButtonNameChar + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
+//            alphabetButtonsArray[ch - firstButtonNameChar] = new Button(String.valueOf(ch));
+//        }
+
+//        barChart.getData().add(dataSeries); //TODO Uncomment this line?
+
+//        getChildren().add(barChart);
+    }
+
+    private void createLeftPaneButtons() {
+        newNetBtn = new Button("New Net");
+        noiseBtn = new ToggleButton("Noise");
+        learnBtn = new Button("Learn 500 Cycles");
+        createAlphabetButtons();
+    }
+
+    private void createAlphabetButtons() {
+        alphabetButtonsArray = new Button[Patterns.matricesArray.length];
+//        for (int i = 0; i < alphabetButtonsArray.length; i++) { //TODO Loop through the chars
+//            alphabetButtonsArray[i] = new Button(String.valueOf((char) (firstButtonNameChar + i)));
+//        }
+        for (char ch = firstButtonNameChar; ch < firstButtonNameChar + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
+            alphabetButtonsArray[ch - firstButtonNameChar] = new Button(String.valueOf(ch));
+        }
+    }
+
+    private void createSetOnMouseClickedEventHandlers() {
         newNetBtn.setOnMouseClicked(event -> {
             net = getNewNet();
-            CanvasChart.initCanvasChart();
-        });
+//            CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS!
+            renewBarChart(barChart, dataSeries);
+//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
 
+        });
         learnBtn.setOnMouseClicked(event -> {
-            learn(cyclesToLearn); // output = getOutput();
-            CanvasChart.initCanvasChart();
-        });
+            LeftPane.this.learn(cyclesToLearn); // output = getOutput();
+//            CanvasChart.initCanvasChart();  //TODO UNCOMMENT THIS!
+            renewBarChart(barChart, dataSeries);
+//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
 
-//        for (Button btn : btnAlphabetArray) {
-        for (int i = 0; i < Patterns.matricesArray.length; i++) {
+
+        });
+        createAlphabetButtonsSetOnMouseClickedEventHandlers();
+    }
+
+    private void createAlphabetButtonsSetOnMouseClickedEventHandlers() {
+        for (int i = 0; i < alphabetButtonsArray.length; i++) {
             int finalI = i;
-            btnAlphabetArray[i].setOnMouseClicked(ae -> {
-                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesArray[finalI]));
-                CanvasChart.initCanvasChart();
+            alphabetButtonsArray[i].setOnMouseClicked(ae -> {
+                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray. How to connect these two arrays?
+//                CanvasChart.initCanvasChart();  //TODO UNCOMMENT THIS!                                                      // TODO Hint: (key -> value)
+                renewBarChart(barChart, dataSeries);
+//                Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+
             });
         }
     }
 
+    private void addButtons() {
+        getChildren().addAll(newNetBtn, noiseBtn, learnBtn, separator1);
+        for (int i = 0; i < alphabetButtonsArray.length; i++) getChildren().add(alphabetButtonsArray[i]);
+//        getChildren().addAll(separator2, canvasChart);
+        getChildren().add(separator2);
+    }
+
     private void learn(int cyclesToLearn) {
-
 //        net = getNewNet(); //TODO Might be only in the launching application or by clicking "New net button"
-
         Random r = new Random();
         for (int cycleNum = 0; cycleNum <= cyclesToLearn; ++cycleNum) {
             int letterNumber = r.nextInt(Patterns.matricesArray.length);
@@ -82,7 +174,7 @@ public class LeftPane extends VBox {
     public FFBP getNewNet() {
         int ivLength = Patterns.matricesArray[0].length * Patterns.matricesArray[0][0].length;
 //        int[] layout = {256, 16, 8};
-        int[] layout = {ivLength, hiddenLayerVectorLength, Patterns.ovArray.length}; //TODO "Main.rightPane.vector.length"=8 instead of "btnAlphabetArray.length", "Patterns.matricesArray.length" gives NPE
+        int[] layout = {ivLength, hiddenLayerVectorLength, Patterns.ovArray.length}; //TODO "Main.rightPane.vector.length"=8 instead of "alphabetButtonsArray.length", "Patterns.matricesArray.length" gives NPE
         FFBP net = new FFBP(layout);
         net.randomize(lowerBound, upperBound);
         net.setEta(eta);

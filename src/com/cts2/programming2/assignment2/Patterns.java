@@ -22,7 +22,7 @@ public class Patterns {
 //        return pattern;
 //    }
 
-    public static final double[] ovA = {1, 0, 0, 0, 0, 0, 0, 0};
+    public static final double[] ovA = {1, 0, 0, 0, 0, 0, 0, 0}; //TODO Loop
     public static final double[] ovB = {0, 1, 0, 0, 0, 0, 0, 0};
     public static final double[] ovC = {0, 0, 1, 0, 0, 0, 0, 0};
     public static final double[] ovD = {0, 0, 0, 1, 0, 0, 0, 0};
