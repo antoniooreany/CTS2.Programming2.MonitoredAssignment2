@@ -1,4 +1,4 @@
-package ver2;
+package com.cts2.programming2.assignment2;
 
 import ffbp.FFBP;
 import javafx.scene.control.Button;
@@ -9,42 +9,36 @@ import javafx.scene.layout.VBox;
 import java.util.Random;
 
 public class LeftPane extends VBox {
+    private static final double lowerBound = -0.1;
+    private static final double upperBound = +0.1;
+    private static final double eta = 0.5;
+    private static final double alpha = 0.5;
+    private static final int hiddenLayerVectorLength = 16;
+    private final int cyclesToLearn = 500;
     public final Button newNetBtn = new Button("New Net");
     public final ToggleButton noiseBtn = new ToggleButton("Noise");
-    public final Button learn500CyclesBtn = new Button("Learn 500 Cycles");
+    public final Button learnBtn = new Button("Learn 500 Cycles");
     public final Separator separator1 = new Separator();
-
-    public Button[] btnsLetters;
-
+    public Button[] btnAlphabetArray;
     public final Separator separator2 = new Separator();
     public CanvasChart canvasChart = new CanvasChart(); //TODO Do it with BarChart. setAnimation(off)
-    private final int cyclesToLearn = 500;
     public FFBP net;
     public double[] output;
     public static int rawCount = Main.ROW_COUNT; //TODO
     public static int colCount = Main.COL_COUNT; //TODO
-
+    private final int AlphabetButtonsAmount = Patterns.matricesArray.length;
 
     public LeftPane() {
+        char firstButtonName = 'A';
+        btnAlphabetArray = new Button[AlphabetButtonsAmount];
+        for (int i = 0; i < AlphabetButtonsAmount; i++) {
+            btnAlphabetArray[i] = new Button(String.valueOf((char)(firstButtonName + i)));
+        }
+        getChildren().addAll(newNetBtn, noiseBtn, learnBtn, separator1);
+        for (int i = 0; i < AlphabetButtonsAmount; i++) getChildren().add(btnAlphabetArray[i]);
+        getChildren().addAll(separator2, canvasChart);
 
-        btnsLetters = new Button[]{
-                new Button("A"),
-                new Button("B"),
-                new Button("C"),
-                new Button("D"),
-                new Button("E"),
-                new Button("F"),
-                new Button("G"),
-                new Button("H")
-        };
-//        for (int i = 0; i < 8; i++) {
-//            btnsLetters[i] = new Button();
-//        }
 
-//        getChildren().addAll(newNetBtn, noiseBtn, learn500CyclesBtn, separator1, aBtn, bBtn, cBtn, dBtn, eBtn, fBtn, gBtn, hBtn, separator2, canvasChart);
-        getChildren().addAll(newNetBtn, noiseBtn, learn500CyclesBtn, separator1,
-                btnsLetters[0], btnsLetters[1], btnsLetters[2], btnsLetters[3], btnsLetters[4], btnsLetters[5], btnsLetters[6], btnsLetters[7],
-                separator2, canvasChart);
         net = getNewNet();
         output = getOutput();
 
@@ -53,16 +47,16 @@ public class LeftPane extends VBox {
             CanvasChart.initCanvasChart();
         });
 
-        learn500CyclesBtn.setOnMouseClicked(event -> {
+        learnBtn.setOnMouseClicked(event -> {
             learn(cyclesToLearn); // output = getOutput();
             CanvasChart.initCanvasChart();
         });
 
-//        for (Button btn : btnsLetters) {
-        for (int i = 0; i < Patterns.matricesLetter.length; i++) {
+//        for (Button btn : btnAlphabetArray) {
+        for (int i = 0; i < Patterns.matricesArray.length; i++) {
             int finalI = i;
-            btnsLetters[i].setOnMouseClicked(ae -> {
-                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesLetter[finalI]));
+            btnAlphabetArray[i].setOnMouseClicked(ae -> {
+                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesArray[finalI]));
                 CanvasChart.initCanvasChart();
             });
         }
@@ -74,9 +68,9 @@ public class LeftPane extends VBox {
 
         Random r = new Random();
         for (int cycleNum = 0; cycleNum <= cyclesToLearn; ++cycleNum) {
-            int letterNumber = r.nextInt(Patterns.matricesLetter.length);
-            net.activateInputAndFeedForward(Patterns.getVector(Patterns.matricesLetter[letterNumber]));
-            net.applyDesiredOutputAndPropagateBack(Patterns.ovLetter[letterNumber]);
+            int letterNumber = r.nextInt(Patterns.matricesArray.length);
+            net.activateInputAndFeedForward(Patterns.getVector(Patterns.matricesArray[letterNumber]));
+            net.applyDesiredOutputAndPropagateBack(Patterns.ovArray[letterNumber]);
         }
     }
 
@@ -85,18 +79,20 @@ public class LeftPane extends VBox {
         return net.getOutput();
     }
 
-    public static FFBP getNewNet() {
-        int[] layout = {256, 16, 8};
+    public FFBP getNewNet() {
+        int ivLength = Patterns.matricesArray[0].length * Patterns.matricesArray[0][0].length;
+//        int[] layout = {256, 16, 8};
+        int[] layout = {ivLength, hiddenLayerVectorLength, Patterns.ovArray.length}; //TODO "Main.rightPane.vector.length"=8 instead of "btnAlphabetArray.length", "Patterns.matricesArray.length" gives NPE
         FFBP net = new FFBP(layout);
-        net.randomize(-0.1, +0.1);
-        net.setEta(0.5);
-        net.setAlpha(0.5);
+        net.randomize(lowerBound, upperBound);
+        net.setEta(eta);
+        net.setAlpha(alpha);
         return net;
     }
 
     public double[][] getMatrixWithNoise(double[][] matrix) {
         if (noiseBtn.isSelected())
-            return applyNoise(matrix); //TODO If button Noise is pressed, learning with or without noise?
+            return applyNoise(matrix); //TODO If button Noise is pressed, learning WITH or WITHOUT noise?
         else return matrix;
     }
 

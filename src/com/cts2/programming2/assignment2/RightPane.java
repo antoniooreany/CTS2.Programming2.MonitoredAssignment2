@@ -1,4 +1,4 @@
-package ver2;
+package com.cts2.programming2.assignment2;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;

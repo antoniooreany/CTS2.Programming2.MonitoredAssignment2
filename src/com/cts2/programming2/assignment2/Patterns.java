@@ -1,4 +1,4 @@
-package ver2;
+package com.cts2.programming2.assignment2;
 
 public class Patterns {
 
@@ -31,7 +31,7 @@ public class Patterns {
     public static final double[] ovG = {0, 0, 0, 0, 0, 0, 1, 0};
     public static final double[] ovH = {0, 0, 0, 0, 0, 0, 0, 1};
 
-    public static final double[][] ovLetter = {ovA, ovB, ovC, ovD, ovE, ovF, ovG, ovH};
+    public static final double[][] ovArray = {ovA, ovB, ovC, ovD, ovE, ovF, ovG, ovH};
 
 
     public static final double[][] matrixA = {
@@ -186,5 +186,5 @@ public class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
     };
 
-    public static final double[][][] matricesLetter = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
+    public static final double[][][] matricesArray = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
 }

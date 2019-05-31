@@ -1,9 +1,9 @@
-package ver2;
+package com.cts2.programming2.assignment2;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-public class _CanvasChart extends Canvas {
+public class __CanvasChart extends Canvas {
     private static int width = 200;
     private static int height = 500;
     private GraphicsContext gc = getGraphicsContext2D();
@@ -14,7 +14,7 @@ public class _CanvasChart extends Canvas {
     private int barWidth = 12;
     private double[] output;
 
-    _CanvasChart(double[] output) {
+    __CanvasChart(double[] output) {
         super(width, height);
         this.output = output;
         int row = 0;

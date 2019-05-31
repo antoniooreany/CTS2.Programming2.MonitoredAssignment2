@@ -1,4 +1,4 @@
-package ver2;
+package com.cts2.programming2.assignment2;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
