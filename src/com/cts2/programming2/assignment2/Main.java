@@ -38,10 +38,12 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         // Create the major HBox.
         rootNode = new HBox(ROOT_NODE_SPACING);
+
         // Create the GridPane.
         rightPane = new RightPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
         // Gaps at the outside borders
-        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
+//        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
+        rootNode.setPadding(new Insets(10));
         leftPane = new LeftPane();
         leftPane.setMaxSize(300,90000);
         // Create a scene.

@@ -42,6 +42,7 @@ public class LeftPane extends VBox {
 
 
     LeftPane() {
+        super(10);
         net = getNewNet();
         output = getOutput();
 
@@ -80,6 +81,7 @@ public class LeftPane extends VBox {
 
         barChart.setBarGap(0);
         barChart.setLegendVisible(false);
+        barChart.setPrefHeight(300);
 
         getChildren().add(barChart);
 
