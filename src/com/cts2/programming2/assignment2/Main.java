@@ -31,6 +31,9 @@ public class Main extends Application {
     static RightPane rightPane;
     static LeftPane leftPane;
     public static Scene scene;
+    // Gaps at the outside borders
+//        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
+    private int rootNodePaddings = 10;
 
     // Override the start() method.
     public void start(Stage stage) {
@@ -41,11 +44,10 @@ public class Main extends Application {
 
         // Create the GridPane.
         rightPane = new RightPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
-        // Gaps at the outside borders
-//        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
-        rootNode.setPadding(new Insets(10));
+        rootNode.setPadding(new Insets(rootNodePaddings));
         leftPane = new LeftPane();
-        leftPane.setMaxSize(300,90000);
+//        leftPane.setMaxSize(300,800);
+        leftPane.setPrefSize(300, (PIXEL_HEIGHT + H_GAP) * ROW_COUNT);
         // Create a scene.
         scene = new Scene(rootNode);
         // Handle a mouse press and drag event on the scene.

@@ -53,7 +53,7 @@ public class LeftPane extends VBox {
 //        createAndAddCanvasChart();
 
         createAndAddBarChart();
-        this.setOpaqueInsets(new Insets(10,10,10,10)); // TODO Add gaps between buttons
+//        this.setOpaqueInsets(new Insets(10,10,10,10)); // TODO Add gaps between buttons
 
     }
 
@@ -76,12 +76,24 @@ public class LeftPane extends VBox {
         renewBarChart(barChart, dataSeries);
 //        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
 
+        barChart.setStyle("-fx-bar-fill: #fd84ff;");
+
+//        barChart.getData().addAll(series1);
+//
+//        if (bluebutton.isSelected()) {
+//            barchart.lookupAll(".default-color0.chart-bar")
+//                    .forEach(n -> n.setStyle("-fx-bar-fill: blue;"));
+//        }
+
         // Add Series to BarChart.
         barChart.getData().add(dataSeries); //TODO Uncomment this line?
 
         barChart.setBarGap(0);
         barChart.setLegendVisible(false);
         barChart.setPrefHeight(300);
+//        barChart.setColor //TODO SetColor
+//        barChart.setStyle();
+
 
         getChildren().add(barChart);
 
