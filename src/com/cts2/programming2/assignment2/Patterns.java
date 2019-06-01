@@ -1,15 +1,17 @@
 package com.cts2.programming2.assignment2;
 
-public class Patterns {
+class Patterns {
 
-    public static double[] getVector(double[][] matrixA) {
-        double[] pattern = new double[Main.rightPane.pixelCount];
-        for (int row = 0; row < matrixA.length; row++) {
-            for (int col = 0; col < matrixA[row].length; col++) {
-                pattern[row * Main.COL_COUNT + col] = matrixA[row][col];
-            }
+    static double[] getVector(double[][] matrix) {
+//        double[] vector = new double[Main.rightPane.pixelCount];
+        int matrixRowAmount = matrix.length;
+        int matrixColAmount = matrix[0].length;
+        double[] vector = new double[matrixRowAmount * matrixColAmount];
+        for (int row = 0; row < matrixRowAmount; row++) {
+            //TODO Where to place "Main.COL_COUNT" not to making dot invoking?
+            System.arraycopy(matrix[row], 0, vector, row * matrixColAmount, matrixColAmount);
         }
-        return pattern;
+        return vector;
     }
 
 //    public static double[][] getOvLetter(double[][][] matrixA) {
@@ -21,17 +23,6 @@ public class Patterns {
 //        }
 //        return pattern;
 //    }
-
-    public static final double[] ovA = {1, 0, 0, 0, 0, 0, 0, 0}; //TODO Loop
-    public static final double[] ovB = {0, 1, 0, 0, 0, 0, 0, 0};
-    public static final double[] ovC = {0, 0, 1, 0, 0, 0, 0, 0};
-    public static final double[] ovD = {0, 0, 0, 1, 0, 0, 0, 0};
-    public static final double[] ovE = {0, 0, 0, 0, 1, 0, 0, 0};
-    public static final double[] ovF = {0, 0, 0, 0, 0, 1, 0, 0};
-    public static final double[] ovG = {0, 0, 0, 0, 0, 0, 1, 0};
-    public static final double[] ovH = {0, 0, 0, 0, 0, 0, 0, 1};
-
-    public static final double[][] ovArray = {ovA, ovB, ovC, ovD, ovE, ovF, ovG, ovH};
 
 
     public static final double[][] matrixA = {
@@ -187,4 +178,14 @@ public class Patterns {
     };
 
     public static final double[][][] matricesArray = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
+
+    public static final double[][] ovArray = getOvArray();
+
+    private static double[][] getOvArray() {
+        double[][] result = new double[matricesArray.length][matricesArray.length];
+        for (int i = 0; i < matricesArray.length; i++) result[i][i] = 1;
+        return result;
+    }
+
+
 }

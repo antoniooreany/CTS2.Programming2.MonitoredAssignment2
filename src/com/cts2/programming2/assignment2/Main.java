@@ -3,7 +3,6 @@ package com.cts2.programming2.assignment2;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,8 +17,8 @@ public class Main extends Application {
     private static final double RIGHT_INSET = 10;
     private static final double BOTTOM_INSET = 10;
     private static final double LEFT_INSET = 10;
-    public static final int COL_COUNT = 16;
-    public static final int ROW_COUNT = 16;
+    static final int COL_COUNT = 16;
+    static final int ROW_COUNT = 16;
     private static final double H_GAP = 2;
     private static final double V_GAP = 2;
     private static final double PIXEL_WIDTH = 40;
@@ -29,8 +28,8 @@ public class Main extends Application {
     private static final String TITLE = "Monitored Assignment1";
 
     public static HBox rootNode;
-    public static RightPane rightPane;
-    public static LeftPane leftPane;
+    static RightPane rightPane;
+    static LeftPane leftPane;
     public static Scene scene;
 
     // Override the start() method.
@@ -44,10 +43,11 @@ public class Main extends Application {
         // Gaps at the outside borders
         rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
         leftPane = new LeftPane();
+        leftPane.setMaxSize(300,90000);
         // Create a scene.
         scene = new Scene(rootNode);
         // Handle a mouse press and drag event on the scene.
-        rightPane.addEventHandler(MouseEvent.ANY, rightPane.getMouseEventHandler());
+//        rightPane.addEventHandler(MouseEvent.ANY, rightPane.getMouseEventHandler()); //TODO Move this statement into the constructor of the RightPane?
         // Create a scene.
         rootNode.getChildren().addAll(leftPane, rightPane);
         // Set the scene on the stage.
