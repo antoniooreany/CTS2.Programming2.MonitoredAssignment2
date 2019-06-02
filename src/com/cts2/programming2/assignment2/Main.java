@@ -43,18 +43,16 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         // Create the major HBox.
         rootNode = new HBox(ROOT_NODE_SPACING);
-
         // Create the GridPane.
-        rightPane = new RightPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
         rootNode.setPadding(new Insets(rootNodePaddings));
+        rightPane = new RightPane(COL_COUNT, ROW_COUNT, H_GAP, V_GAP, PIXEL_WIDTH, PIXEL_HEIGHT, INIT_COLOR, PAINT_COLOR);
         leftPane = new LeftPane();
 //        leftPane.setMaxSize(300,800);
         leftPane.setPrefSize(300, (PIXEL_HEIGHT + H_GAP) * ROW_COUNT);
         // Create a scene.
         scene = new Scene(rootNode);
         // add "style.css"
-//        scene.getStylesheets().add(getClass().getResource("C:/Users/User/IdeaProjects/CTS2.Programming2.MonitoredAssignment2/src/com/cts2/programming2/assignment2/style.css").toString());
-        scene.getStylesheets().add((new File("C:/Users/User/IdeaProjects/CTS2.Programming2.MonitoredAssignment2/src/com/cts2/programming2/assignment2/style.css")).toURI().toString());
+        scene.getStylesheets().add((new File("./src/com/cts2/programming2/assignment2/style.css")).toURI().toString());
         // Handle a mouse press and drag event on the scene.
 //        rightPane.addEventHandler(MouseEvent.ANY, rightPane.getMouseEventHandler()); //TODO Move this statement into the constructor of the RightPane?
         // Create a scene.
