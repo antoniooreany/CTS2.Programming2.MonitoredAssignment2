@@ -76,7 +76,7 @@ public class LeftPane extends VBox {
         renewBarChart(barChart, dataSeries);
 //        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
 
-        barChart.setStyle("-fx-bar-fill: #fd84ff;");
+//        barChart.setStyle("-fx-bar-fill: #fd84ff;");
 
 //        Node n = barChart.lookup(".data.chart-bar");
 //        n.setStyle("-fx-bar-fill: red");
@@ -195,7 +195,7 @@ public class LeftPane extends VBox {
         }
     }
 
-    double[] getOutput() {
+    public double[] getOutput() {
         net.activateInputAndFeedForward(Main.rightPane.vector);
         return net.getOutput();
     }

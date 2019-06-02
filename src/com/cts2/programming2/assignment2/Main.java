@@ -2,6 +2,7 @@ package com.cts2.programming2.assignment2;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -33,8 +34,8 @@ public class Main extends Application {
     private int rootNodePaddings = 10;
 
     public static HBox rootNode;
-    static RightPane rightPane;
-    static LeftPane leftPane;
+    public static RightPane rightPane;
+    public static LeftPane leftPane;
     public static Scene scene;
 
     // Override the start() method.
@@ -53,6 +54,9 @@ public class Main extends Application {
         scene = new Scene(rootNode);
         // add "style.css"
         scene.getStylesheets().add((new File("./src/com/cts2/programming2/assignment2/style.css")).toURI().toString());
+//        Node n = leftPane.barChart.lookup(".data0.chart-bar");
+//        n.setStyle("-fx-bar-fill: #fd84ff;");
+
         // Handle a mouse press and drag event on the scene.
 //        rightPane.addEventHandler(MouseEvent.ANY, rightPane.getMouseEventHandler()); //TODO Move this statement into the constructor of the RightPane?
         // Create a scene.

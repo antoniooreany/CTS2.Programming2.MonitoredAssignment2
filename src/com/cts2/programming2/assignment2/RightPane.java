@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import ver1.PaintException;
 
-class RightPane extends GridPane {
+public class RightPane extends GridPane {
     // TODO Do we need all of these fields?
     // TODO If not, than How to avoid creating these fields?
     private final int rowCount;

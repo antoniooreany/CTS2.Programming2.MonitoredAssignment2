@@ -1,4 +1,4 @@
-package com.cts2.programming2.assignment2;
+package com.cts2.programming2.assignment2.barChartExamples.barChartExample0;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

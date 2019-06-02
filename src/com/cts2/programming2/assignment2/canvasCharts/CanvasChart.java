@@ -1,5 +1,6 @@
-package com.cts2.programming2.assignment2;
+package com.cts2.programming2.assignment2.canvasCharts;
 
+import com.cts2.programming2.assignment2.Main;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
