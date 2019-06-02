@@ -28,14 +28,14 @@ public class Main extends Application {
     private static final Color INIT_COLOR = Color.WHITE;
     private static final Color PAINT_COLOR = Color.BLACK;
     private static final String TITLE = "Monitored Assignment1";
+    // Gaps at the outside borders
+//        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
+    private int rootNodePaddings = 10;
 
     public static HBox rootNode;
     static RightPane rightPane;
     static LeftPane leftPane;
     public static Scene scene;
-    // Gaps at the outside borders
-//        rightPane.setPadding(new Insets(TOP_INSET, RIGHT_INSET, BOTTOM_INSET, LEFT_INSET));
-    private int rootNodePaddings = 10;
 
     // Override the start() method.
     public void start(Stage stage) {

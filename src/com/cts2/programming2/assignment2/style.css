@@ -1,0 +1,11 @@
+/*.default-color1.chart-bar {*/
+/*    -fx-bar-fill: green;*/
+/*}*/
+/**/
+/*.default-color0.chart-bar {*/
+/*    -fx-bar-fill: blue*/
+/*}*/
+
+.chart-bar {
+    -fx-bar-fill: green;
+}

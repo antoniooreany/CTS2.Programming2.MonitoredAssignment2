@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="mainpane" fx:id="mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1085.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <TextField layoutY="517.0" prefHeight="67.0" prefWidth="309.0" />
+        <BarChart fx:id="barchart" barGap="2.0" layoutY="8.0" prefHeight="498.0" prefWidth="1085.0" style="-fx-border-color: chartreuse;">
+            <xAxis>
+                <CategoryAxis endMargin="0.0" side="BOTTOM" startMargin="0.0" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis prefHeight="364.0" prefWidth="33.0" side="LEFT" upperBound="0.0" />
+            </yAxis>
+        </BarChart>
+        <Button layoutX="447.0" layoutY="512.0" mnemonicParsing="false" onAction="#selam" prefHeight="67.0" prefWidth="139.0" text="Draw" />
+        <RadioButton fx:id="bluebutton" layoutX="324.0" layoutY="551.0" mnemonicParsing="false" text="Blue">
+            <toggleGroup>
+                <ToggleGroup fx:id="group" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="redbutton" layoutX="324.0" layoutY="517.0" mnemonicParsing="false" text="Red" toggleGroup="$group" />
+    </children>
+</Pane>
