@@ -2,7 +2,7 @@ package com.cts2.programming2.assignment2;
 
 import ffbp.FFBP;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -78,6 +78,9 @@ public class LeftPane extends VBox {
 
         barChart.setStyle("-fx-bar-fill: #fd84ff;");
 
+//        Node n = barChart.lookup(".data.chart-bar");
+//        n.setStyle("-fx-bar-fill: red");
+
 //        barChart.getData().addAll(series1);
 //
 //        if (bluebutton.isSelected()) {
@@ -106,7 +109,7 @@ public class LeftPane extends VBox {
             dataSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(ch), getOutput()[ch - firstButtonNameChar]));
         }
 
-//        barChart.getData().add(dataSeries); //TODO Uncomment this line?
+//        barChart.getData().add(dataSeries); //TODO IllegalArgumentException: Duplicate series added. Uncomment this line?
 
 //        getChildren().add(barChart);
     }
