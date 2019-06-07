@@ -1,8 +1,7 @@
-package com.cts2.programming2.assignment2;
+package ver2;
 
 import ffbp.FFBP;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -14,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.util.Random;
+
+import static ver2.Patterns.matricesArray;
 
 public class LeftPane extends VBox {
     private static final double lowerBound = -0.1;
@@ -74,7 +75,7 @@ public class LeftPane extends VBox {
         dataSeries = new XYChart.Series<String, Number>();
 
         renewBarChart(barChart, dataSeries);
-//        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+//        Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries);
 
 //        barChart.setStyle("-fx-bar-fill: #fd84ff;");
 
@@ -125,7 +126,7 @@ public class LeftPane extends VBox {
     }
 
     private void createAlphabetButtons() {
-        alphabetButtonsArray = new Button[Patterns.matricesArray.length];
+        alphabetButtonsArray = new Button[matricesArray.length];
         for (char ch = firstButtonNameChar; ch < firstButtonNameChar + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
             alphabetButtonsArray[ch - firstButtonNameChar] = new Button(String.valueOf(ch));
             alphabetButtonsArray[ch - firstButtonNameChar].setMaxSize(buttonMaxWidth, buttonMaxHeight);
@@ -137,7 +138,7 @@ public class LeftPane extends VBox {
             net = getNewNet();
 //            CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS!
             renewBarChart(barChart, dataSeries);
-//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+//            Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries);
 
         });
 
@@ -145,22 +146,22 @@ public class LeftPane extends VBox {
             @Override
             public void handle(MouseEvent event) {
                 // TODO Apply noise for the currently drown picture
-//                double[] vector = applyNoise(Main.rightPane.vector);
-//                double[] vector = applyNoise(output);
-//                double[] vector = applyNoise();
+//                double[] DOUBLES_VECTOR = applyNoise(Main.paintPane.DOUBLES_VECTOR);
+//                double[] DOUBLES_VECTOR = applyNoise(output);
+//                double[] DOUBLES_VECTOR = applyNoise();
 //                output = getOutput();
 
                 renewBarChart(barChart, dataSeries);
-//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+//            Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries);
 
             }
         });
 
         learnBtn.setOnMouseClicked(event -> {
-            LeftPane.this.learn(cyclesToLearn); // output = getOutput();
+            learn(cyclesToLearn); // output = getOutput();
 //            CanvasChart.initCanvasChart();  //TODO UNCOMMENT THIS!
             renewBarChart(barChart, dataSeries);
-//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+//            Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries);
         });
         createAlphabetButtonsSetOnMouseClickedEventHandlers();
     }
@@ -169,10 +170,10 @@ public class LeftPane extends VBox {
         for (int i = 0; i < alphabetButtonsArray.length; i++) {
             int finalI = i;
             alphabetButtonsArray[i].setOnMouseClicked(ae -> {
-                Main.rightPane.paintByMatrix(getMatrixWithNoise(Patterns.matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray. How to connect these two arrays?
+                Main.rightPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray. How to connect these two arrays?
 //                CanvasChart.initCanvasChart();  //TODO UNCOMMENT THIS!                                                      // TODO Hint: (key -> value)
                 renewBarChart(barChart, dataSeries);
-//                Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries);
+//                Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries);
 
             });
         }
@@ -189,8 +190,16 @@ public class LeftPane extends VBox {
 //        net = getNewNet(); //TODO Might be only in the launching application or by clicking "New net button"
         Random r = new Random();
         for (int cycleNum = 0; cycleNum <= cyclesToLearn; ++cycleNum) {
-            int letterNumber = r.nextInt(Patterns.matricesArray.length);
-            net.activateInputAndFeedForward(Patterns.getVector(Patterns.matricesArray[letterNumber]));
+            int letterNumber = r.nextInt(matricesArray.length);
+            double[][] matrixElementToLearn = noiseBtn.isSelected() ?
+                    getMatrixWithNoise(matricesArray[letterNumber]) :
+                    matricesArray[letterNumber];
+//            if (noiseBtn.isSelected()) {
+//                matrixElementToLearn = getMatrixWithNoise(matricesArray[letterNumber]);
+//            } else {
+//                matrixElementToLearn = matricesArray[letterNumber];
+//            }
+            net.activateInputAndFeedForward(Patterns.getVector(matrixElementToLearn));
             net.applyDesiredOutputAndPropagateBack(Patterns.ovArray[letterNumber]);
         }
     }
@@ -201,9 +210,9 @@ public class LeftPane extends VBox {
     }
 
     private FFBP getNewNet() {
-        int ivLength = Patterns.matricesArray[0].length * Patterns.matricesArray[0][0].length;
+        int ivLength = matricesArray[0].length * matricesArray[0][0].length;
 //        int[] layout = {256, 16, 8};
-        int[] layout = {ivLength, hiddenLayerVectorLength, Patterns.ovArray.length}; //TODO "Main.rightPane.vector.length"=8 instead of "alphabetButtonsArray.length", "Patterns.matricesArray.length" gives NPE
+        int[] layout = {ivLength, hiddenLayerVectorLength, Patterns.ovArray.length}; //TODO "Main.paintPane.DOUBLES_VECTOR.length"=8 instead of "alphabetButtonsArray.length", "Patterns.matricesArray.length" gives NPE
         FFBP net = new FFBP(layout);
         net.randomize(lowerBound, upperBound);
         net.setEta(eta);
@@ -238,7 +247,7 @@ public class LeftPane extends VBox {
 //        for (int col = 0; col < colCount; col++) {
         for (int seqNum = 0; seqNum < resultVector.length; seqNum++) {
             if (random.nextDouble() < 0.1) {
-//                if (vector[seqNum] == 0) resultVector[seqNum] = 1; //TODO Optimize "< 0.5"
+//                if (DOUBLES_VECTOR[seqNum] == 0) resultVector[seqNum] = 1; //TODO Optimize "< 0.5"
                 resultVector[seqNum] = (vector[seqNum] == 0) ? 1 : 0; //TODO Optimize "< 0.5"
 //                else resultVector[seqNum] = 0;
             } else resultVector[seqNum] = vector[seqNum];

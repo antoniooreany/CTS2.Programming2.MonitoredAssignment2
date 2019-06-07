@@ -1,11 +1,10 @@
-package com.cts2.programming2.assignment2;
+package ver2;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import ver1.PaintException;
 
 public class RightPane extends GridPane {
     // TODO Do we need all of these fields?
@@ -48,7 +47,7 @@ public class RightPane extends GridPane {
         // Initialize pixels.
         fillRoot();
         // Add EventHandler
-        addEventHandler(MouseEvent.ANY, getMouseEventHandler()); //TODO Move this statement into the constructor of the RightPane?
+        addEventHandler(MouseEvent.ANY, getMouseEventHandler()); //TODO Move this statement into the constructor of the PaintPane?
     }
 
     // Root filler method
@@ -69,7 +68,7 @@ public class RightPane extends GridPane {
         int col = getPixelPositionIndex(mouseEvent.getX(), hGap, getPadding().getLeft(), pixelWidth);
         int row = getPixelPositionIndex(mouseEvent.getY(), vGap, getPadding().getTop(), pixelHeight);
 
-//        Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+//        Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
 
         // Create the painted pixel, put it in the appropriate position (if it exists) in the rootPane
         if (col >= 0 && col < colCount && row >= 0 && row < rowCount) {
@@ -100,10 +99,10 @@ public class RightPane extends GridPane {
         //TODO  nn.take output[8],
         //TODO  draw output[8] in BarChart
 
-//        Main.leftPane.net = LeftPane.getNewNet(); // TODO No!
-//        Main.leftPane.output = Main.leftPane.getOutput();
+//        Main.controller.net = Controller.getNewNet(); // TODO No!
+//        Main.controller.output = Main.controller.getOutput();
 //
-//        double[] output = Main.leftPane.getOutput(); //TODO NPE
+//        double[] output = Main.controller.getOutput(); //TODO NPE
 //        CanvasChart.drawCanvasChart(output);
 
     }
@@ -112,7 +111,7 @@ public class RightPane extends GridPane {
     private int getPixelPositionIndex(double coordinate, double gap, double inset, double pixelSize) {
 //        CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS! //TODO Move this statement into the addNewPixel()
 //        renewBarChart(barChart, dataSeries);
-//            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+//            Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
 
         // Position index calculation
         return (int) ((coordinate + gap / 2 - inset) / (pixelSize + gap));
@@ -124,17 +123,17 @@ public class RightPane extends GridPane {
             // in case of PRIMARY BUTTON - paintByMouse
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                 paintByMouse(mouseEvent, paintColor);
-//                    Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+//                    Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
             }
             // in case of SECONDARY BUTTON - clear
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 fillRoot();
-//                    Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
+//                    Main.controller.renewBarChart(Main.controller.barChart, Main.controller.dataSeries); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
             }
             // TODO How to redraw the Canvas chart when adding the pixel?
 //                CanvasChart.initCanvasChart(); //TODO UNCOMMENT THIS! // TODO How to redraw the Canvas chart when adding the pixel?
-            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the LeftPane. Fix it.
-            // TODO In which place of the code does "renewBarChart()" have to be placed for not to using so many dots? Maybe not in the "LeftPane"?
+            Main.leftPane.renewBarChart(Main.leftPane.barChart, Main.leftPane.dataSeries); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
+            // TODO In which place of the code does "renewBarChart()" have to be placed for not to using so many dots? Maybe not in the "Controller"?
             // TODO How to redraw the Canvas chart when adding the pixel?
             // TODO renewBarChart() - is the last statement in some method of the instance, returned by this method.
         };

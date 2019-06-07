@@ -38,7 +38,7 @@ public class TilePaneDemo extends Application {
         sqrsCubesPane.setPrefColumns(3);
 
         // Create the root node of the scene graph and add 
-        // the tile pane to it. 
+        // the tile paintPane to it.
         FlowPane rootNode = new FlowPane();
         rootNode.getChildren().add(sqrsCubesPane);
 

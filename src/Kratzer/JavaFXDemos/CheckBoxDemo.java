@@ -38,7 +38,7 @@ public class CheckBoxDemo extends Application {
         // Center the controls vertically, left-align them horizontally. 
         rootNode.setAlignment(Pos.CENTER_LEFT);
 
-        // Set a padding value of 10 on the left for the flow pane. 
+        // Set a padding value of 10 on the left for the flow paintPane.
         rootNode.setPadding(new Insets(0, 0, 0, 10));
 
         // Create a scene. 

@@ -1,4 +1,4 @@
-package com.cts2.programming2.assignment2.canvasCharts;
+package ver2.canvasCharts;
 
 import com.cts2.programming2.assignment2.Main;
 import javafx.scene.canvas.Canvas;
@@ -12,7 +12,7 @@ public class CanvasChart extends Canvas {
     private static int linesNum = 10;
     private int low = 3;
     private double high = 2;
-    private double[] output = new double[Main.rightPane.pixelCount];
+    private double[] output = new double[16/*Main.paintPane.pixelCount*/];
     private static final int barGap = 12;
     private static final int leftGap = 10;
     private static double linesHeight = height / linesNum;
@@ -21,14 +21,14 @@ public class CanvasChart extends Canvas {
     public CanvasChart() {
         super(width, height);
         gc = this.getGraphicsContext2D();
-//        Main.leftPane.net = LeftPane.getNewNet(); // TODO create a new net for getting an output
+//        Main.controller.net = Controller.getNewNet(); // TODO create a new net for getting an output
         drawCanvasChart(output);
     }
 
     public static void initCanvasChart() {
         gc.clearRect(0,0,width,height);
-        double[] output = Main.leftPane.getOutput();
-        drawCanvasChart(output);
+//        double[] output = Main.controller.getOutput();
+//        drawCanvasChart(output);
     }
 
     public static void drawCanvasChart(double[] output) {

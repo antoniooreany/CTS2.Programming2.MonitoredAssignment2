@@ -1,4 +1,4 @@
-package Kratzer.JavaFXDemos;// Demonstrate a scroll pane.
+package Kratzer.JavaFXDemos;// Demonstrate a scroll paintPane.
 // This program scrolls the contents of a multi-line 
 // label, but any other type of Node can be scrolled. 
 
@@ -51,7 +51,7 @@ public class ScrollPaneDemo extends Application {
                 + "offers an elegant solution to a wide range\n"
                 + "user interface design challenges.");
 
-        // Create a scroll pane, setting scrlLabel as the content. 
+        // Create a scroll paintPane, setting scrlLabel as the content.
         scrlPane = new ScrollPane(scrlLabel);
 
         // Set the viewport width and height. 
@@ -73,7 +73,7 @@ public class ScrollPaneDemo extends Application {
             }
         });
 
-        // Add the scroll pane and button to the scene graph.  
+        // Add the scroll paintPane and button to the scene graph.
         rootNode.getChildren().addAll(scrlPane, btnReset);
 
         // Show the stage and its scene.  

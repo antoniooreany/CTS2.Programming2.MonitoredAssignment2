@@ -114,7 +114,7 @@ public class MenuDemo extends Application {
         reset.setOnAction(MEHandler);
         about.setOnAction(MEHandler);
 
-        // Add the menu bar to the top of the border pane and 
+        // Add the menu bar to the top of the border paintPane and
         // the response label to the center position. 
         rootNode.setTop(mb);
         rootNode.setCenter(response);

@@ -42,7 +42,7 @@ public class FFBP {
 	
 	public FFBP(int[] layout) {
 		try {
-			// copy the layout vector
+			// copy the layout DOUBLES_VECTOR
 			this.layout = new int[layout.length];
 			for (int i = 0; i < layout.length; ++i)
 				this.layout[i] = layout[i];
@@ -84,7 +84,7 @@ public class FFBP {
 		try {
 			if (input.length != layer[0].cell.length)
 				throw new ffbp.FFBPError();
-			// copy the input vector
+			// copy the input DOUBLES_VECTOR
 			for (int i = 0; i < input.length; ++i)
 				layer[0].cell[i].activation = input[i];
 			// feed forward
@@ -117,7 +117,7 @@ public class FFBP {
 			if (desired.length != layer[layout.length-1].cell.length)
 				throw new ffbp.FFBPError();
 			aggregateDelta = 0.0;
-			// calculate delta at output vector
+			// calculate delta at output DOUBLES_VECTOR
 			for (int i = 0; i < desired.length; ++i) {
 				layer[layout.length-1].cell[i].delta = 
 					(desired[i] - layer[layout.length-1].cell[i].activation) *

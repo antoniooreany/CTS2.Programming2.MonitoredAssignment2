@@ -1,8 +1,9 @@
-package com.cts2.programming2.assignment2;
+package ver2;
 
 class Patterns {
 
     static double[] getVector(double[][] matrix) {
+//        double[] DOUBLES_VECTOR = new double[Main.paintPane.pixelCount];
         int matrixRowAmount = matrix.length;
         int matrixColAmount = matrix[0].length;
         double[] vector = new double[matrixRowAmount * matrixColAmount];

@@ -1,4 +1,4 @@
-package com.cts2.programming2.assignment2.canvasCharts;
+package ver2.canvasCharts;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

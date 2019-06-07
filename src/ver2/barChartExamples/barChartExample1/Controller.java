@@ -1,4 +1,4 @@
-package com.cts2.programming2.assignment2.barChartExamples.barChartExample1;
+package ver2.barChartExamples.barChartExample1;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
