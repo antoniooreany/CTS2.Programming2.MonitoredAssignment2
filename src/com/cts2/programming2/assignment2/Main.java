@@ -16,7 +16,7 @@ public class Main extends Application {
     private static final String TITLE = "Monitored Assignment1";
     private static final int ROOT_NODE_SPACING = 10;
     // Gaps at the outside borders
-    private static int ROOT_NODE_PADDINGS = 10;
+    private static final int ROOT_NODE_PADDINGS = 10;
 
 //    public static Scene scene;
 
