@@ -20,7 +20,7 @@ public class PaintPane extends GridPane {
     private final static Color INIT_COLOR = Color.WHITE;
     private final static Color PAINT_COLOR = Color.BLACK;
 
-    private final static double[][] MATRIX = new double[ROW_COUNT][COL_COUNT];
+//    private final static double[][] MATRIX = new double[ROW_COUNT][COL_COUNT];
     private final static double[] VECTOR = new double[PIXEL_COUNT];
 
     private Controller controller;
@@ -63,10 +63,10 @@ public class PaintPane extends GridPane {
         Pixel pixel = new Pixel(this, PIXEL_WIDTH, PIXEL_HEIGHT, color, row, col);
         add(pixel, col, row);
         if (color == INIT_COLOR) {
-            MATRIX[row][col] = 0;
+//            MATRIX[row][col] = 0;
             VECTOR[pixel.seqNum] = 0;
         } else {
-            MATRIX[row][col] = 1;
+//            MATRIX[row][col] = 1;
             VECTOR[pixel.seqNum] = 1;
         }
     }

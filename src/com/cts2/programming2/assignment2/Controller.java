@@ -183,6 +183,7 @@ public class Controller extends VBox {
         return result;
     }
 
+    // TODO !!!Redundant method!!!
     private static double[] applyNoise(double[] vector) {
         double[] resultVector = new double[vector.length];
         Random random = new Random();
