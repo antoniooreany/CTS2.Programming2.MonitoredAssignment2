@@ -24,6 +24,7 @@ public class Controller extends VBox {
     private static final int PREF_WIDTH = 300;
     private static final int BUTTON_MAX_HEIGHT = 20;
     private static final char FIRST_BUTTON_NAME_CHAR = 'A';
+    private static final int SPACING = 10;
 
     private Button newNetBtn;
     private ToggleButton noiseBtn;
@@ -32,7 +33,6 @@ public class Controller extends VBox {
     private Button[] alphabetButtonsArray;
     private Separator separator2 = new Separator();
     private FFBP net;
-//    private double[] output;
 
     private BarChart<String, Number> barChart;
     private XYChart.Series<String, Number> dataSeries;
@@ -40,12 +40,10 @@ public class Controller extends VBox {
     private PaintPane paintPane;
 
     Controller(PaintPane paintPane) {
-        super(10);
+        super(SPACING);
         this.paintPane = paintPane;
-//        setPrefSize(PREF_WIDTH, (paintPane.getPixelHeight() + paintPane.getHgap()) * paintPane.getRowCount());
         setPrefSize(PREF_WIDTH, paintPane.getHeight());
         net = getNewNet();
-//        output = getOutput();
         paintPane.registerController(this);
 
         createLeftPaneButtons();
@@ -60,29 +58,27 @@ public class Controller extends VBox {
         NumberAxis yAxis = new NumberAxis();
 
         // Create a BarChart
-        barChart = new BarChart<String, Number>(xAxis, yAxis);
-        barChart.setAnimated(false); //TODO Does it needed to be done?
+        barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setAnimated(false);
 
         // Create series
-        dataSeries = new XYChart.Series<String, Number>();
+        dataSeries = new XYChart.Series<>();
 
+        // TODO Apply noise if needed for the currently drown picture
         renewBarChart(dataSeries);
 
         // Add Series to BarChart.
-        barChart.getData().add(dataSeries); //TODO Uncomment this line?
-//        barChart.getData().get(0);
+        barChart.getData().add(dataSeries);
 
         barChart.setBarGap(0);
         barChart.setLegendVisible(false);
-//        barChart.setPrefHeight(300);
-//        barChart.setPrefHeight(paintPane.getHeight() - );
 
         getChildren().add(barChart);
     }
 
     void renewBarChart(XYChart.Series<String, Number> dataSeries) {
-        for (char ch = FIRST_BUTTON_NAME_CHAR; ch < FIRST_BUTTON_NAME_CHAR + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
-            dataSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(ch), getOutput()[ch - FIRST_BUTTON_NAME_CHAR]));
+        for (char ch = FIRST_BUTTON_NAME_CHAR; ch < FIRST_BUTTON_NAME_CHAR + alphabetButtonsArray.length; ch++) {
+            dataSeries.getData().add(new XYChart.Data<>(String.valueOf(ch), getOutput()[ch - FIRST_BUTTON_NAME_CHAR]));
         }
     }
 
@@ -98,7 +94,7 @@ public class Controller extends VBox {
 
     private void createAlphabetButtons() {
         alphabetButtonsArray = new Button[matricesArray.length];
-        for (char ch = FIRST_BUTTON_NAME_CHAR; ch < FIRST_BUTTON_NAME_CHAR + alphabetButtonsArray.length; ch++) { //TODO Loop through the chars
+        for (char ch = FIRST_BUTTON_NAME_CHAR; ch < FIRST_BUTTON_NAME_CHAR + alphabetButtonsArray.length; ch++) {
             alphabetButtonsArray[ch - FIRST_BUTTON_NAME_CHAR] = new Button(String.valueOf(ch));
             alphabetButtonsArray[ch - FIRST_BUTTON_NAME_CHAR].setMaxSize(PREF_WIDTH, BUTTON_MAX_HEIGHT);
         }
@@ -111,12 +107,12 @@ public class Controller extends VBox {
         });
 
         noiseBtn.setOnMousePressed(event -> {
-            // TODO Apply noise for the currently drown picture
+            // TODO Apply noise if needed for the currently drown picture
             renewBarChart(dataSeries);
         });
 
         learnBtn.setOnMouseClicked(event -> {
-            learn(CYCLES_TO_LEARN); // output = getOutput();
+            learn(CYCLES_TO_LEARN);
             renewBarChart(dataSeries);
         });
         createAlphabetButtonsSetOnMouseClickedEventHandlers();
@@ -126,7 +122,7 @@ public class Controller extends VBox {
         for (int i = 0; i < alphabetButtonsArray.length; i++) {
             int finalI = i;
             alphabetButtonsArray[i].setOnMouseClicked(ae -> {
-                paintPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray. How to connect these two arrays? // TODO Hint: (key -> value)
+                paintPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray.length. How to connect these two arrays? // TODO Hint: (key -> value)
                 renewBarChart(dataSeries);
             });
         }
@@ -157,7 +153,7 @@ public class Controller extends VBox {
 
     private FFBP getNewNet() {
         int ivLength = matricesArray[0].length * matricesArray[0][0].length;
-        int[] layout = {ivLength, HIDDEN_LAYER_VECTOR_LENGTH, Patterns.ovArray.length}; //TODO "Main.paintPane.DOUBLES_VECTOR.length"=8 instead of "alphabetButtonsArray.length", "Patterns.matricesArray.length" gives NPE
+        int[] layout = {ivLength, HIDDEN_LAYER_VECTOR_LENGTH, Patterns.ovArray.length};
         FFBP net = new FFBP(layout);
         net.randomize(LOWER_BOUND, UPPER_BOUND);
         net.setEta(ETA);
@@ -166,8 +162,9 @@ public class Controller extends VBox {
     }
 
     private double[][] getMatrixWithNoise(double[][] matrix) {
+        //If button Noise is pressed, learning WITH noise
         if (noiseBtn.isSelected())
-            return applyNoise(matrix); //TODO If button Noise is pressed, learning WITH or WITHOUT noise?
+            return applyNoise(matrix);
         else return matrix;
     }
 
@@ -189,14 +186,10 @@ public class Controller extends VBox {
     private static double[] applyNoise(double[] vector) {
         double[] resultVector = new double[vector.length];
         Random random = new Random();
-//        for (int col = 0; col < colCount; col++) {
         for (int seqNum = 0; seqNum < resultVector.length; seqNum++) {
             if (random.nextDouble() < 0.1) {
-//                if (DOUBLES_VECTOR[seqNum] == 0) resultVector[seqNum] = 1; //TODO Optimize "< 0.5"
                 resultVector[seqNum] = (vector[seqNum] == 0) ? 1 : 0; //TODO Optimize "< 0.5"
-//                else resultVector[seqNum] = 0;
             } else resultVector[seqNum] = vector[seqNum];
-//            }
         }
         return resultVector;
     }

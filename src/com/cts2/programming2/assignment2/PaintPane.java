@@ -20,8 +20,6 @@ public class PaintPane extends GridPane {
     private final static Color INIT_COLOR = Color.WHITE;
     private final static Color PAINT_COLOR = Color.BLACK;
 
-    private final static Pixel[][] PIXEL_MATRIX = new Pixel[ROW_COUNT][COL_COUNT];
-    private final static Pixel[] PIXEL_VECTOR = new Pixel[PIXEL_COUNT];
     private final static double[][] MATRIX = new double[ROW_COUNT][COL_COUNT];
     private final static double[] VECTOR = new double[PIXEL_COUNT];
 
@@ -34,7 +32,7 @@ public class PaintPane extends GridPane {
         // Initialize pixels.
         fillRoot();
         // Add EventHandler
-        addEventHandler(MouseEvent.ANY, getMouseEventHandler()); //TODO Move this statement into the constructor of the PaintPane?
+        addEventHandler(MouseEvent.ANY, getMouseEventHandler());
     }
 
     // Root filler method
@@ -64,8 +62,6 @@ public class PaintPane extends GridPane {
     private void addNewPixel(int row, int col, Color color) {
         Pixel pixel = new Pixel(this, PIXEL_WIDTH, PIXEL_HEIGHT, color, row, col);
         add(pixel, col, row);
-//        PIXEL_MATRIX[row][col] = pixel;
-//        PIXEL_VECTOR[pixel.seqNum] = pixel;
         if (color == INIT_COLOR) {
             MATRIX[row][col] = 0;
             VECTOR[pixel.seqNum] = 0;
@@ -92,8 +88,7 @@ public class PaintPane extends GridPane {
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 fillRoot();
             }
-            controller.renewBarChart(controller.getBarChart().getData().get(0)); // TODO The only one call renewBarChart() from outside the Controller. Fix it.
-            // TODO In which place of the code does "renewBarChart()" have to be placed for not to using so many dots? Maybe not in the "Controller"?
+            controller.renewBarChart(controller.getBarChart().getData().get(0));
         };
     }
 

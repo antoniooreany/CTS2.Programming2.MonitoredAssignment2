@@ -8,16 +8,12 @@ import javafx.stage.Stage;
 
 
 // Group members : Rodion Danilenko, Anton Gorshkov, Henry Cela
-//TODO Bug: when app starts, no info in the BarChart available. When mouse appears in the Scene, data appears in the BarChart.
-//TODO Make the info available in the BarChart when app starts.
 public class Main extends Application {
     // Initialize constants
-    private static final String TITLE = "Monitored Assignment1";
+    private static final String TITLE = "Monitored Assignment2";
     private static final int ROOT_NODE_SPACING = 10;
     // Gaps at the outside borders
     private static final int ROOT_NODE_PADDINGS = 10;
-
-//    public static Scene scene;
 
     // Override the start() method.
     public void start(Stage stage) {
