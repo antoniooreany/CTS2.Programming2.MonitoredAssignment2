@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.io.File;
 
 // Group members : Rodion Danilenko, Anton Gorshkov, Henry Cela
 //TODO Bug: when app starts, no info in the BarChart available. When mouse appears in the Scene, data appears in the BarChart.
@@ -32,8 +31,10 @@ public class Main extends Application {
         Controller controller = new Controller(paintPane);
         // Create a scene.
         Scene scene = new Scene(rootNode);
-        // add "style.css"
-        scene.getStylesheets().add((new File("./src/com/cts2/programming2/assignment2/style.css")).toURI().toString());
+        // add "style.css" from a compiled jar-file
+        String css = Main.class.getResource("/style.css").toExternalForm();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(css);
         // Create a scene.
         rootNode.getChildren().addAll(controller, paintPane);
         // Set the scene on the stage.

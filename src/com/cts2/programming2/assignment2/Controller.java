@@ -1,6 +1,6 @@
 package com.cts2.programming2.assignment2;
 
-import ffbp.FFBP;
+import com.cts2.programming2.assignment2.ffbp.FFBP;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;

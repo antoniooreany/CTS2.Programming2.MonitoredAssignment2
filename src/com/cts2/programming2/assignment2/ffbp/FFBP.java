@@ -1,6 +1,4 @@
-package Kratzer.FFBP.ffbp;
-
-import ffbp.FFBPError;
+package com.cts2.programming2.assignment2.ffbp;
 
 public class FFBP {
 
@@ -55,7 +53,7 @@ public class FFBP {
 			alpha = 0.0;
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new ffbp.FFBPError();
+			throw new FFBPError();
 		}
 	}
 	
@@ -76,14 +74,14 @@ public class FFBP {
 			}
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new ffbp.FFBPError();
+			throw new FFBPError();
 		}	
 	}
 	
 	public void activateInputAndFeedForward(double[] input) {
 		try {
 			if (input.length != layer[0].cell.length)
-				throw new ffbp.FFBPError();
+				throw new FFBPError();
 			// copy the input DOUBLES_VECTOR
 			for (int i = 0; i < input.length; ++i)
 				layer[0].cell[i].activation = input[i];
@@ -97,7 +95,7 @@ public class FFBP {
 				}				
 			aggregateDelta = 0.0;
 		} catch (Exception e) {
-			throw new ffbp.FFBPError();
+			throw new FFBPError();
 		}	
 	}
 	
@@ -108,14 +106,14 @@ public class FFBP {
 				output[i] = layer[layout.length-1].cell[i].activation;
 			return output;
 		} catch (Exception e) {
-			throw new ffbp.FFBPError();
+			throw new FFBPError();
 		}	
 	}
 	
 	public void applyDesiredOutputAndPropagateBack(double[] desired) {
 		try {
 			if (desired.length != layer[layout.length-1].cell.length)
-				throw new ffbp.FFBPError();
+				throw new FFBPError();
 			aggregateDelta = 0.0;
 			// calculate delta at output DOUBLES_VECTOR
 			for (int i = 0; i < desired.length; ++i) {
