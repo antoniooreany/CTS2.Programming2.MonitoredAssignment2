@@ -6,15 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-
 // Group members : Rodion Danilenko, Anton Gorshkov, Henry Cela
 public class Main extends Application {
     // Initialize constants
     private static final String TITLE = "Monitored Assignment2";
     private static final int ROOT_NODE_SPACING = 10;
-    // Gaps at the outside borders
-    private static final int ROOT_NODE_PADDINGS = 10;
-
+    private static final int ROOT_NODE_PADDING = 10;
     // Override the start() method.
     public void start(Stage stage) {
         // Give the stage a TITLE.
@@ -22,7 +19,7 @@ public class Main extends Application {
         // Create the major HBox.
         HBox rootNode = new HBox(ROOT_NODE_SPACING);
         // Create the GridPane.
-        rootNode.setPadding(new Insets(ROOT_NODE_PADDINGS));
+        rootNode.setPadding(new Insets(ROOT_NODE_PADDING));
         PaintPane paintPane = new PaintPane();
         Controller controller = new Controller(paintPane);
         // Create a scene.

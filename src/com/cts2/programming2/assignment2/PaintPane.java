@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class PaintPane extends GridPane {
+    // Initialize constants
     private final static int ROW_COUNT = 16;
     private final static int COL_COUNT = 16;
     private final static int PIXEL_COUNT = ROW_COUNT * COL_COUNT;
@@ -26,10 +27,10 @@ public class PaintPane extends GridPane {
     private Controller controller;
 
     public PaintPane() {
-        // Set vertical and horizontal gaps between controls.
+        // Set vertical and horizontal gaps between controls
         setVgap(V_GAP);
         setHgap(H_GAP);
-        // Initialize pixels.
+        // Initialize pixels
         fillRoot();
         // Add EventHandler
         addEventHandler(MouseEvent.ANY, getMouseEventHandler());
@@ -88,7 +89,7 @@ public class PaintPane extends GridPane {
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 fillRoot();
             }
-            controller.renewBarChart(controller.getBarChart().getData().get(0));
+            controller.updateBarChartSeries(controller.getBarChart().getData().get(0));
         };
     }
 

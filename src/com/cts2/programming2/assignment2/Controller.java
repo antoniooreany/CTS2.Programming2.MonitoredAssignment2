@@ -15,6 +15,7 @@ import java.util.Random;
 import static com.cts2.programming2.assignment2.Patterns.matricesArray;
 
 public class Controller extends VBox {
+    // Initialize constants
     private static final double LOWER_BOUND = -0.1;
     private static final double UPPER_BOUND = +0.1;
     private static final double ETA = 0.5;
@@ -25,7 +26,7 @@ public class Controller extends VBox {
     private static final int BUTTON_MAX_HEIGHT = 20;
     private static final char FIRST_BUTTON_NAME_CHAR = 'A';
     private static final int SPACING = 10;
-
+    // Initialize variables
     private Button newNetBtn;
     private ToggleButton noiseBtn;
     private Button learnBtn;
@@ -33,10 +34,8 @@ public class Controller extends VBox {
     private Button[] alphabetButtonsArray;
     private Separator separator2 = new Separator();
     private FFBP net;
-
     private BarChart<String, Number> barChart;
-    private XYChart.Series<String, Number> dataSeries;
-
+    private XYChart.Series<String, Number> series;
     private PaintPane paintPane;
 
     Controller(PaintPane paintPane) {
@@ -54,6 +53,7 @@ public class Controller extends VBox {
     }
 
     private void createAndAddBarChart() {
+        // Create axises
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
 
@@ -62,13 +62,13 @@ public class Controller extends VBox {
         barChart.setAnimated(false);
 
         // Create series
-        dataSeries = new XYChart.Series<>();
+        series = new XYChart.Series<>();
 
         // TODO Apply noise if needed for the currently drown picture
-        renewBarChart(dataSeries);
+        updateBarChartSeries(series);
 
         // Add Series to BarChart.
-        barChart.getData().add(dataSeries);
+        barChart.getData().add(series);
 
         barChart.setBarGap(0);
         barChart.setLegendVisible(false);
@@ -76,9 +76,12 @@ public class Controller extends VBox {
         getChildren().add(barChart);
     }
 
-    void renewBarChart(XYChart.Series<String, Number> dataSeries) {
+    void updateBarChartSeries(XYChart.Series<String, Number> series) {
         for (char ch = FIRST_BUTTON_NAME_CHAR; ch < FIRST_BUTTON_NAME_CHAR + alphabetButtonsArray.length; ch++) {
-            dataSeries.getData().add(new XYChart.Data<>(String.valueOf(ch), getOutput()[ch - FIRST_BUTTON_NAME_CHAR]));
+            String buttonName = String.valueOf(ch);
+            double value = getOutput()[ch - FIRST_BUTTON_NAME_CHAR];
+            XYChart.Data<String, Number> data = new XYChart.Data<>(buttonName, value);
+            series.getData().add(data);
         }
     }
 
@@ -103,17 +106,17 @@ public class Controller extends VBox {
     private void createSetOnMouseClickedEventHandlers() {
         newNetBtn.setOnMouseClicked(event -> {
             net = getNewNet();
-            renewBarChart(dataSeries);
+            updateBarChartSeries(series);
         });
 
         noiseBtn.setOnMousePressed(event -> {
             // TODO Apply noise if needed for the currently drown picture
-            renewBarChart(dataSeries);
+            updateBarChartSeries(series);
         });
 
         learnBtn.setOnMouseClicked(event -> {
             learn(CYCLES_TO_LEARN);
-            renewBarChart(dataSeries);
+            updateBarChartSeries(series);
         });
         createAlphabetButtonsSetOnMouseClickedEventHandlers();
     }
@@ -123,7 +126,7 @@ public class Controller extends VBox {
             int finalI = i;
             alphabetButtonsArray[i].setOnMouseClicked(ae -> {
                 paintPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray.length. How to connect these two arrays? // TODO Hint: (key -> value)
-                renewBarChart(dataSeries);
+                updateBarChartSeries(series);
             });
         }
     }
@@ -183,7 +186,7 @@ public class Controller extends VBox {
         return result;
     }
 
-    // TODO !!!Redundant method!!!
+    // TODO !!!Redundant method!!! Remove???
     private static double[] applyNoise(double[] vector) {
         double[] resultVector = new double[vector.length];
         Random random = new Random();
