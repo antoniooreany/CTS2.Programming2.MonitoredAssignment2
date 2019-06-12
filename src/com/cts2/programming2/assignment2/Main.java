@@ -16,11 +16,12 @@ public class Main extends Application {
     public void start(Stage stage) {
         // Give the stage a TITLE.
         stage.setTitle(TITLE);
-        // Create the major HBox.
+        // Create the major HBox-container.
         HBox rootNode = new HBox(ROOT_NODE_SPACING);
-        // Create the GridPane.
         rootNode.setPadding(new Insets(ROOT_NODE_PADDING));
+        // Create the GridPane-container for painting, with all the functionality for this.
         PaintPane paintPane = new PaintPane();
+        // Create the VBox-container with buttons and chart, with all the functionality for this..
         Controller controller = new Controller(paintPane);
         // Create a scene.
         Scene scene = new Scene(rootNode);
