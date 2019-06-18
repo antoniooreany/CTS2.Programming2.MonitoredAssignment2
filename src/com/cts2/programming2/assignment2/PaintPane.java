@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
-public class PaintPane extends GridPane {
+class PaintPane extends GridPane {
     // Initialize constants
     private final static int ROW_COUNT = 16;
     private final static int COL_COUNT = 16;
@@ -21,12 +21,11 @@ public class PaintPane extends GridPane {
     private final static Color INIT_COLOR = Color.WHITE;
     private final static Color PAINT_COLOR = Color.BLACK;
 
-//    private final static double[][] MATRIX = new double[ROW_COUNT][COL_COUNT];
     private final static double[] VECTOR = new double[PIXEL_COUNT];
 
     private Controller controller;
 
-    public PaintPane() {
+    PaintPane() {
         // Set vertical and horizontal gaps between controls
         setVgap(V_GAP);
         setHgap(H_GAP);
@@ -64,10 +63,8 @@ public class PaintPane extends GridPane {
         Pixel pixel = new Pixel(this, PIXEL_WIDTH, PIXEL_HEIGHT, color, row, col);
         add(pixel, col, row);
         if (color == INIT_COLOR) {
-//            MATRIX[row][col] = 0;
             VECTOR[pixel.seqNum] = 0;
         } else {
-//            MATRIX[row][col] = 1;
             VECTOR[pixel.seqNum] = 1;
         }
     }
@@ -93,7 +90,7 @@ public class PaintPane extends GridPane {
         };
     }
 
-    public void paintByMatrix(double[][] matrix) {
+    void paintByMatrix(double[][] matrix) {
         fillRoot();
         if (matrix.length != COL_COUNT) throw new PaintException();
         for (int col = 0; col < COL_COUNT; col++) {
@@ -104,39 +101,19 @@ public class PaintPane extends GridPane {
         }
     }
 
-    public void registerController(Controller controller) {
+    void registerController(Controller controller) {
         this.controller = controller;
     }
 
-    public int getRowCount() {
+    int getRowCount() {
         return ROW_COUNT;
     }
 
-    public int getColCount() {
+    int getColCount() {
         return COL_COUNT;
     }
 
-    public int getPixelCount() {
-        return PIXEL_COUNT;
-    }
-
-    public double gethGap() {
-        return H_GAP;
-    }
-
-    public double getvGap() {
-        return V_GAP;
-    }
-
-    public double getPixelWidth() {
-        return PIXEL_WIDTH;
-    }
-
-    public double getPixelHeight() {
-        return PIXEL_HEIGHT;
-    }
-
-    public double[] getVector() {
+    double[] getVector() {
         return VECTOR;
     }
 }

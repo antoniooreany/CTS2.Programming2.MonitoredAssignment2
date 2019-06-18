@@ -7,24 +7,12 @@ class Patterns {
         int matrixColAmount = matrix[0].length;
         double[] vector = new double[matrixRowAmount * matrixColAmount];
         for (int row = 0; row < matrixRowAmount; row++) {
-            //TODO Where to place "Main.COL_COUNT" not to making dot invoking?
             System.arraycopy(matrix[row], 0, vector, row * matrixColAmount, matrixColAmount);
         }
         return vector;
     }
 
-//    public static double[][] getOvLetter(double[][][] matrixA) {
-//        double[] pattern = new double[Main.paintPane.pixelCount];
-//        for (int row = 0; row < matrixA.length; row++) {
-//            for (int col = 0; col < matrixA[row].length; col++) {
-//                pattern[row * Main.COL_COUNT + col] = matrixA[row][col];
-//            }
-//        }
-//        return pattern;
-//    }
-
-
-    public static final double[][] matrixA = {
+    private static final double[][] matrixA = {
             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0},
@@ -43,7 +31,7 @@ class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
     };
 
-    public static final double[][] matrixB = {
+    private static final double[][] matrixB = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -62,7 +50,7 @@ class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] matrixC = {
+    private static final double[][] matrixC = {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -81,7 +69,7 @@ class Patterns {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] matrixD = {
+    private static final double[][] matrixD = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -100,7 +88,7 @@ class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] matrixE = {
+    private static final double[][] matrixE = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -119,7 +107,7 @@ class Patterns {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    public static final double[][] matrixF = {
+    private static final double[][] matrixF = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -138,7 +126,7 @@ class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
-    public static final double[][] matrixG = {
+    private static final double[][] matrixG = {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
             {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -157,7 +145,7 @@ class Patterns {
             {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
-    public static final double[][] matrixH = {
+    private static final double[][] matrixH = {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -176,15 +164,13 @@ class Patterns {
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1}
     };
 
-    public static final double[][][] matricesArray = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
+    static final double[][][] matricesArray = new double[][][]{matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixG, matrixH};
 
-    public static final double[][] ovArray = getOvArray();
+    static final double[][] ovArray = getOvArray();
 
     private static double[][] getOvArray() {
         double[][] result = new double[matricesArray.length][matricesArray.length];
         for (int i = 0; i < matricesArray.length; i++) result[i][i] = 1;
         return result;
     }
-
-
 }

@@ -14,7 +14,7 @@ import java.util.Random;
 
 import static com.cts2.programming2.assignment2.Patterns.matricesArray;
 
-public class Controller extends VBox {
+class Controller extends VBox {
     // Initialize constants
     private static final double LOWER_BOUND = -0.1;
     private static final double UPPER_BOUND = +0.1;
@@ -45,7 +45,7 @@ public class Controller extends VBox {
         net = getNewNet();
         paintPane.registerController(this);
 
-        createLeftPaneButtons();
+        createControllerButtons();
         createSetOnMouseClickedEventHandlers();
         addButtons();
 
@@ -85,7 +85,7 @@ public class Controller extends VBox {
         }
     }
 
-    private void createLeftPaneButtons() {
+    private void createControllerButtons() {
         newNetBtn = new Button("New Net");
         noiseBtn = new ToggleButton("Noise");
         learnBtn = new Button("Learn 500 Cycles");
@@ -125,7 +125,9 @@ public class Controller extends VBox {
         for (int i = 0; i < alphabetButtonsArray.length; i++) {
             int finalI = i;
             alphabetButtonsArray[i].setOnMouseClicked(ae -> {
-                paintPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI])); //TODO alphabetButtonsArray.length =!= matricesArray.length. How to connect these two arrays? // TODO Hint: (key -> value)
+                paintPane.paintByMatrix(getMatrixWithNoise(matricesArray[finalI]));
+                // TODO alphabetButtonsArray.length =!= matricesArray.length. How to connect these two arrays?
+                // TODO Hint: (key -> value)
                 updateBarChartSeries(series);
             });
         }
@@ -149,7 +151,7 @@ public class Controller extends VBox {
         }
     }
 
-    public double[] getOutput() {
+    private double[] getOutput() {
         net.activateInputAndFeedForward(paintPane.getVector());
         return net.getOutput();
     }
@@ -186,19 +188,7 @@ public class Controller extends VBox {
         return result;
     }
 
-    // TODO !!!Redundant method!!! Remove???
-    private static double[] applyNoise(double[] vector) {
-        double[] resultVector = new double[vector.length];
-        Random random = new Random();
-        for (int seqNum = 0; seqNum < resultVector.length; seqNum++) {
-            if (random.nextDouble() < 0.1) {
-                resultVector[seqNum] = (vector[seqNum] == 0) ? 1 : 0; //TODO Optimize "< 0.5"
-            } else resultVector[seqNum] = vector[seqNum];
-        }
-        return resultVector;
-    }
-
-    public BarChart<String, Number> getBarChart() {
+    BarChart<String, Number> getBarChart() {
         return barChart;
     }
 }

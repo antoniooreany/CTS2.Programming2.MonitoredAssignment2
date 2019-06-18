@@ -5,12 +5,9 @@ import javafx.scene.shape.Rectangle;
 
 class Pixel extends Rectangle {
 
-    private PaintPane parent;
     int seqNum;
 
-    public Pixel(PaintPane parent, double width, double height, Color color, int row, int col) {
-        // Parent initialization
-        this.parent = parent;
+    Pixel(PaintPane parent, double width, double height, Color color, int row, int col) {
         // Sequence number initialization
         this.seqNum = row * parent.getColCount() + col;
         // Setting a geometric parameters of the pixel

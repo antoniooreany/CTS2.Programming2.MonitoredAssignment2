@@ -12,6 +12,7 @@ public class Main extends Application {
     private static final String TITLE = "Monitored Assignment2";
     private static final int ROOT_NODE_SPACING = 10;
     private static final int ROOT_NODE_PADDING = 10;
+
     // Override the start() method.
     public void start(Stage stage) {
         // Give the stage a TITLE.
